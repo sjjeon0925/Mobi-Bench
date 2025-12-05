@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<div bounds="[0,0][1080,2337]" index="0">
+    <div bounds="[0,132][1080,279]" index="1">
+        <TextField bounds="[42,170][408,241]" index="2">Audio Recorder</TextField>
+        <LinearLayoutCompat bounds="[848,132][1080,279]" index="3">
+            <Button description="Search" long-clickable="true" bounds="[848,142][975,268]" index="4"/>
+            <Button description="More options" long-clickable="true" bounds="[975,142][1080,268]" index="5"/>
+        </LinearLayoutCompat>
+    </div>
+    <div bounds="[0,279][1080,2337]" index="6">
+        <TextField bounds="[443,279][637,340]" index="7">3.2 GB free</TextField>
+        <div bounds="[42,340][1038,429]" index="8">
+            <Button bounds="[246,340][335,429]" index="9">
+                <TextField bounds="[265,391][315,420]" index="10">All</TextField>
+            </Button>
+            <Button bounds="[744,340][833,429]" index="11">
+                <TextField bounds="[751,391][825,420]" index="12">Stars</TextField>
+            </Button>
+        </div>
+        <RecyclerView bounds="[42,429][1038,2295]" index="13">
+            <Button long-clickable="true" bounds="[42,429][1038,616]" index="14">
+                <div bounds="[42,429][1038,603]" index="15">
+                    <div bounds="[42,429][1038,526]" index="16">
+                        <Button description="Not starred" bounds="[42,446][157,509]" index="17"/>
+                        <TextField bounds="[157,429][919,526]" index="18">2025-08-20 11.34.27.ogg</TextField>
+                        <TextField bounds="[919,445][1038,522]" index="19">00:25</TextField>
+                    </div>
+                    <div bounds="[42,526][1038,603]" index="20">
+                        <TextField bounds="[42,526][409,603]" index="21">2025-08-20 11:35:11</TextField>
+                        <TextField bounds="[890,526][1038,603]" index="22">85.6 kb</TextField>
+                    </div>
+                </div>
+            </Button>
+            <Button long-clickable="true" bounds="[42,619][1038,806]" index="23">
+                <div bounds="[42,619][1038,793]" index="24">
+                    <div bounds="[42,619][1038,716]" index="25">
+                        <Button description="Not starred" bounds="[42,636][157,699]" index="26"/>
+                        <TextField bounds="[157,619][919,716]" index="27">2025-08-07 05.14.19.ogg</TextField>
+                        <TextField bounds="[919,635][1038,712]" index="28">00:37</TextField>
+                    </div>
+                    <div bounds="[42,716][1038,793]" index="29">
+                        <TextField bounds="[42,716][409,793]" index="30">2025-08-07 05:15:25</TextField>
+                        <TextField bounds="[896,716][1038,793]" index="31">0.1 MB</TextField>
+                    </div>
+                </div>
+            </Button>
+        </RecyclerView>
+    </div>
+    <Button description="Record" bounds="[466,2148][613,2295]" index="32"/>
+</div>

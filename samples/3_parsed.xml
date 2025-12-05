@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<div bounds="[0,132][1080,2337]" index="0">
+    <TextField bounds="[42,170][408,241]" index="1">Audio Recorder</TextField>
+    <div bounds="[0,279][1080,2337]" index="2">
+        <div bounds="[42,292][1038,474]" index="3">
+            <TextField bounds="[173,292][906,380]" index="4">2025-08-20 11.34.27.ogg</TextField>
+            <TextField bounds="[337,380][742,474]" index="5">pause
+(3.2 GB free ~ 1 day left)</TextField>
+        </div>
+        <div bounds="[42,2135][1038,2324]" index="6">
+            <TextField bounds="[473,2135][606,2219]" index="7">00:25</TextField>
+            <div bounds="[42,2219][1038,2324]" index="8">
+                <Button description="Cancel" bounds="[42,2219][147,2324]" index="9"/>
+                <Button description="Record" bounds="[487,2219][592,2324]" index="10"/>
+                <Button description="Stop" bounds="[933,2219][1038,2324]" index="11"/>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+[
+    {
+        "type": "Click",
+        "index": 10,
+        "bounds": "[487,2219][592,2324]",
+        "params": {},
+        "default": true
+    },
+    {
+        "type": "Click",
+        "index": 11,
+        "bounds": "[933,2219][1038,2324]",
+        "params": {},
+        "default": false
+    }
+]

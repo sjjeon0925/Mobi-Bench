@@ -1,0 +1,9 @@
+[ 
+    {
+        "type": "OpenApp",
+        "index": -1,
+        "bounds": null,
+        "params": {"app" : "AudioRecoder"},
+        "default": true
+    }
+]
