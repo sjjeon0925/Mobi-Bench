@@ -66,3 +66,18 @@ OPENAI_API_KEY=<your_openai_api_key>
 - Make sure to replace `your_api_key_here` with your actual API key
 - Never commit your actual API keys to version control
 - Add `.env` files to your `.gitignore` to prevent accidental commits
+
+### Dataset info
+
+<img width="401" height="161" alt="mobibench_statistics" src="https://github.com/user-attachments/assets/845e3174-a39a-465a-8463-43ded4fa10ab" />
+<br>
+
+**Mobibench** includes 508 mobile automation tasks, each of which is sampled from four datasets ([llamatouch] [MobileGPT] [Meta-GUI] [AndroidWorld] and then augmented. The tasks are also composed of 58 different apps.
+
+Dataset consists of 3 Parts
+
+**- Task instruction**
+
+**- A serise of UI Screenshot and Parsed UI Xml**
+
+**- A sequence of Multi branch actions**
