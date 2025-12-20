@@ -1,0 +1,509 @@
+category	appname	task_index	step_number	instruction	difficulty	complexity
+Single-App	Audio Recorder	1	5	Record an audio clip using Audio Recorder app and save it	Med	Simple
+Single-App	Broccoli	2	14	Delete all but one of any recipes in the Broccoli app that are exact duplicates, ensuring at least one instance of each unique recipe remains	Hard	Simple
+Single-App	Broccoli	3	10	Delete the following recipes from Broccoli app: Beef Taco, Black Pudding	Med	Simple
+Single-App	Broccoli	4	7	Delete the following recipes from Broccoli app: Pigeon Dimsum	Med	Simple
+Single-App	Broccoli	5	10	Delete the following recipes from Broccoli app: Apple Pie, Banana Bread	Med	Simple
+Single-App	Broccoli	6	6	Delete all but one of any recipes in the Broccoli app that are exact duplicates, ensuring at least one instance of each unique recipe remains.	Med	Simple
+Single-App	Broccoli	7	10	Delete all but one of any recipes in the Broccoli app that are exact duplicates, ensuring at least one instance of each unique recipe remains.	Med	Simple
+Single-App	Camera	8	3	Take one photo	Easy	Simple
+Single-App	Clock	9	15	Create a timer with 1 hours, 30 minutes	Hard	Moder
+Single-App	Clock	10	4	Pause the stopwatch	Easy	Simple
+Single-App	Clock	11	4	Run the stopwatch	Easy	Simple
+Single-App	Contacts	12	11	Create a new contact for Alex Johnson Their number is +1234567890	Med	Simple
+Single-App	Contacts	13	13	Go to the new contact screen and enter the following details_First Name_Gildong, Last Name_Hong, Company_Kaist_Phone_01012345678. Do NOT hit save	Hard	Simple
+Single-App	Expense	14	20	Add the following expenses into the arduia pro expense Lunch 12.50 Parking 5.00 Coffee 3.25	Hard	Moder
+Single-App	Expense	15	14	Add the following expenses into the arduia pro expense Taxi 18:00 Dinner 22.75	Hard	Moder
+Single-App	Expense	16	12	Delete all but one of any expenses in arduia pro expense that are exact duplicates ensuring at least one instance of each unique expense remains	Hard	Moder
+Single-App	Expense	17	8	Delete the following expenses from arduia pro expense Snacks 4.00 Coffee 3.25	Med	Simple
+Single-App	Expense	18	13	Delete all but one of any expenses in arduia pro expense that are exact duplicates ensuring at least one instance of each unique expense remains	Hard	Moder
+Single-App	Expense	19	10	Delete the following expenses from arduia pro expense: Dinner, Lunch	Med	Moder
+Single-App	Expense	20	5	Delete the following expenses from arduia pro expense_Lunch.	Med	Simple
+Single-App	Files	21	10	Copy vacation.jpg in DCIM within the sdk_gphone64_arm64 and save a copy in Download	Med	Moder
+Single-App	Files	22	9	Delete the file receipt1.pdf from the Android filesystem located in the Documents-Receipts folder within the sdk_gphone_x86_64 storage area	Med	Moder
+Single-App	Files	23	12	Move the file receipt2.jpg from Downloads within the sdk_gphone_x86_64 storage area to the Expenses folder within the same sdk_gphone_x86_64 storage area in the Android filesystem	Hard	Moder
+Single-App	Joplin	24	2	Check if the note titled 'Shopping List' in the Joplin app is marked as a to-do list	Easy	Moder
+Single-App	Markor	25	5	Create a new folder in Markor named TravelNotes	Med	Simple
+Single-App	Markor	26	5	Create a new note in Markor named day1.md	Med	Simple
+Single-App	Markor	27	9	Create a new note in Markor named logbook.md and copy the sharing URL of the note to the clipboard	Med	Simple
+Single-App	Markor	28	9	Create a new note in Markor named paste_test.txt then open the note?셲 Info screen	Med	Simple
+Single-App	Markor	29	7	Delete all my notes in Markor	Med	Moder
+Single-App	Markor	30	6	Delete the note in Markor named grocery_list.md	Med	Complex
+Single-App	Markor	31	11	Edit meeting_notes.md in Markor Add to the top of the note Agenda for July 30 Meeting and Save it	Med	Simple
+Single-App	Markor	32	9	In Markor change the sort order so that the most recent note appears at the top then delete the top note in the list	Med	Moder
+Single-App	Markor	33	9	In Markor move the note todo.md from Inbox to Projects	Med	Simple
+Single-App	OsmAnd	34	7	Add a favorite location marker for Eiffel Tower in the OsmAnd maps app	Med	Moder
+Single-App	OsmAnd	35	14	In OsmAnd search for and display the driving route from Ruggell to Bendern	Hard	Moder
+Single-App	Retro Music Player	36	19	Create a playlist in Retro Music titled 'Workout Mix' with the following songs in order Track1, Track2, Track3	Hard	Simple
+Single-App	Retro Music Player	37	7	Add the following songs, in order, 'Don't Talk', 'Gorila' to my playing queue in Retro music	Med	Moder
+Single-App	Retro Music Player	38	25	"Create a playlist in Retro Music titled ""my playlist"" with a duration between 45 and 50 minutes using the provided songs."	Hard	Simple
+Single-App	Retro Music Player	39	19	"Create a playlist in Retro Music titled ""save list"" with the following songs, in order: 'Breath Of Life', 'Don't Talk'. Then export the playlist to the Downloads directory on the device."	Hard	Simple
+Single-App	Settings	40	9	Turn off WiFi then enable bluetooth	Med	Moder
+Single-App	Settings	41	13	Turn on Wifi then open the YouTube app	Hard	Moder
+Single-App	Settings	42	5	Turn bluetooth off	Med	Simple
+Single-App	Settings	43	5	Turn bluetooth on	Med	Simple
+Single-App	Settings	44	4	Turn wifi on	Easy	Moder
+Single-App	Settings	45	4	Turn wifi off	Easy	Moder
+Single-App	Simple Calendar Pro	46	4	What is on my schedule for 2025-08-04 at 11am in Simple Calendar Pro?	Easy	Complex
+Single-App	Simple Calendar Pro	47	6	In Simple Calendar Pro, delete the calendar event on 2025-08-01 at 14h with the title 'Doctor Appointment'	Med	Complex
+Single-App	Simple Calendar Pro	48	3	Do I have any events between 1pm and 8pm 2025-08-06 in Simple Calendar Pro?	Easy	Complex
+Single-App	Simple Calendar Pro	49	4	What is my first event after 2pm 30 on 2025-08-05 in Simple Calendar Pro?	Easy	Complex
+Single-App	Simple Calendar Pro	50	4	What is my next upcoming event in Simple Calendar Pro?	Easy	Moder
+Single-App	Simple Calendar Pro	51	6	What events do I have in the next week in Simple Calendar Pro?	Med	Moder
+Single-App	Simple Calendar Pro	52	3	What events do I have 2025-08-02 in Simple Calendar Pro?	Easy	Complex
+Single-App	Simple Calendar Pro	53	5	When is my next meeting with Dr. Lewis in Simple Calendar Pro?	Med	Complex
+Single-App	Simple Calendar Pro	54	16	Create a calendar event for this Friday at 17h with the title 'Dinner with Friends' and the description 'Meeting at The Grill'. The event should last for 90 mins	Hard	Moder
+Single-App	Simple Calendar Pro	55	18	Create a calendar event for tomorrow at 9h with the title 'Morning Jog' and the description 'Run around the park'. The event should last for 45 mins	Hard	Moder
+Single-App	Simple Calendar Pro	56	18	Create a calendar event in two weeks from today at 10h with the title 'Team Review' and the description 'Biweekly team progress meeting'. The event should last for 60 mins	Hard	Moder
+Single-App	Simple Calendar Pro	57	17	Create a calendar event on 2025-08-01 at 14h with the title 'Doctor Appointment' and the description 'Annual checkup with Dr. Kim'. The event should last for 30 mins	Hard	Moder
+Single-App	Simple Calendar Pro	58	17	Create a calendar event titled 'Yoga Class' and the description 'Weekly group session' starting on 2025-08-01 at 8h The event lasts for 60 minutes	Hard	Moder
+Single-App	Simple Calendar Pro	59	3	Do I have any events 2025-08-03 in Simple Calendar Pro? Answer with the titles only. If there are multiples titles, format your answer in a comma separated list	Easy	Complex
+Single-App	Simple Calendar Pro	60	9	In Simple Calendar Pro, delete all events scheduled for this Monday	Med	Moder
+Single-App	Simple Calendar Pro	61	9	In Simple Calendar Pro, delete all the calendar events on 2025-08-05	Med	Moder
+Single-App	Simple Draw Pro	62	8	Create a new drawing in Simple Draw Pro Name it sketch01.png Save it in the Pictures folder within the sdk_gphone_x86_64 storage area	Med	Simple
+Single-App	Simple SMS Messenger	63	6	"Reply to +15556667777 with message : ""Got it. Talk to you later"" in Simple SMS Messenger"	Med	Simple
+Single-App	Simple SMS Messenger	64	5	Reply to the most recent text message using Simple SMS Messenger with message: I'll call you back soon	Med	Simple
+Single-App	Simple SMS Messenger	65	5	Resend the message I just sent to Lisa in Simple SMS Messenger	Med	Simple
+Single-App	Simple SMS Messenger	66	7	Send a message to +15554321234 with the clipboard content in Simple SMS Messenger	Med	Simple
+Single-App	Simple SMS Messenger	67	7	Send a text message using Simple SMS Messenger to +15559874563 with message: On my way now See you there!	Med	Simple
+Single-App	Simple SMS Messenger	68	11	Text the address of the event to Alice that Bob just sent me in Simple SMS Messenger	Med	Simple
+Single-App	System	69	6	Turn bluetooth off	Med	Simple
+Single-App	System	70	6	Turn bluetooth on	Med	Simple
+Single-App	System	71	5	Turn wifi off	Med	Moder
+Single-App	System	72	5	Turn wifi on	Med	Moder
+Single-App	System	73	5	Copy the lastest message from messenger to clipboard	Med	Simple
+Single-App	Tasks	74	3	How many tasks do I have due next week in Tasks app?	Easy	Moder
+Single-App	Tasks	75	3	Which tasks with high priority are due Aug 8 in the Tasks app?	Easy	Moder
+Single-App	Tasks	76	3	What incomplete tasks do I have still have to do by Aug 8 in Tasks app?	Easy	Moder
+Single-App	Tasks	77	3	What are my high priority tasks in Tasks app?	Easy	Moder
+Single-App	Tasks	78	5	Which tasks have I completed for Aug 5 in Tasks app?	Med	Complex
+Single-App	Tasks	79	3	What tasks do I have due Aug 17 in Tasks app?	Easy	Moder
+Single-App	VLC	80	11	Create a playlist titled 'Workout Mix' with the following files in VLC (located in Internal MemoryVLCVideos), in order warmup.mp4, cardio.mp4, cooldown.mp4	Med	Moder
+Single-App	VLC	81	18	Create a playlist titled 'Morning Routine' with the following files in VLC, in order: stretch.mp4, yoga.mp4. And then, Create a playlist titled 'Evening Routine' with the following files in VLC (located in Internal Memory)	Hard	Moder
+Single-App	Booking.com	82	27	Find the most popular family room hotel near Sidewalk Food Tours of San Francisco, for two adults, no children, check-in 12 days later, 3-night stay, with soundproof rooms, within a budget of $58-$116 per day.	Hard	Complex
+Single-App	Proton Calendar	83	18	Schedule a road trip to Virginia on Friday at 6pm and add a stop at a gas station during the trip.	Hard	Moder
+Single-App	Proton Calendar	84	10	Schedule a time to work on employee reviews tomorrow at 3:00pm.	Med	Complex
+Single-App	Proton Calendar	85	7	Schedule a pickup for Josh next week on Tuesday at 4pm.	Med	Complex
+Single-App	Proton Calendar	86	12	Create an event on October 29 at 3:00pm.	Hard	Complex
+Single-App	Proton Calendar	87	9	Create a basketball game event on Friday at 5 PM and add it to the calendar.	Med	Complex
+Single-App	Proton Calendar	88	12	Add a team meeting on your calendar at 7:15 AM on Tuesday.	Hard	Complex
+Single-App	Proton Calendar	89	24	"Create two calendar events: ""surprise party for Julia"" next Monday at 8pm, and ""Birthday"" on December 15th at 6pm."	Hard	Complex
+Single-App	Proton Calendar	90	2	Open Proton Calender app, and provide the current date.	Easy	Complex
+Single-App	Proton Calendar	91	15	"Add an event called ""New Meeting Time"" today at 4 PM and schedule ""Follow Up"" immediately after it."	Hard	Complex
+Single-App	Proton Calendar	92	7	Schedule a meeting for this Friday.	Med	Complex
+Single-App	Booking.com	93	31	Book a 1-room hotel near The Embarcadero, SF for 1 adult, checking in 3 days later for 2 days, with a daily budget of $174-$232, a view room in a hotel rated 3 stars or equivalent with a pleasant score above 6, onsite parking, and a restaurant, choosing the lowest-star option among available choices.	Hard	Complex
+Single-App	Booking.com	94	25	Book one room for one adult at the Best Western Coyote Point Inn near The Great Pacific Tour Co. for one night starting 8 days from now, within a budget of $116-$174, with family rooms, free Wi-Fi, and a private restroom, selecting the option with the highest review score.	Hard	Complex
+Single-App	Simple Calendar	95	3	Confirm schedule today is Friday.	Easy	Complex
+Single-App	Simple Calendar	96	2	Provide the current date.	Easy	Moder
+Single-App	Proton Calendar	97	2	Open Proton Calender app, Provide today's date.	Easy	Complex
+Single-App	Uber	98	16	Book a taxi from Moscone Center to Joe's Ice Cream immediately using any available car type.	Hard	Moder
+Single-App	Uber	99	16	Book a taxi from Galeria de la Raza to Z. Cioccolato for immediate departure with any available car type.	Hard	Moder
+Single-App	Weather: Live radar & widgets	100	7	Provide the current weather and rain chances for Suzhou today and the percentage of rain expected this Sunday.	Med	Moder
+Single-App	Uber	101	10	Book an UberXL taxi from San Francisco Bicycle Rentals to Union Square immediately.	Med	Moder
+Single-App	Proton Calendar	102	10	Find a skateboarding location or event available on Sunday evening.	Med	Complex
+Single-App	Weather Forecast: Live Weather	103	7	Provide the current and tomorrow's weather forecast for Suzhou, including temperature and conditions, the current weather and chance of rain for Beijing today, and determine the warmest location in Suzhou today (if possible).	Med	Complex
+Single-App	Proton Calendar	104	17	Create a baseball game event on Monday from 2 PM to 4 PM and add it to the calendar.	Hard	Moder
+Single-App	Proton Calendar	105	2	Open Proton Calender app, tell me today's date.	Easy	Complex
+Single-App	Simple Calendar	106	2	Open Proton Calender app, tell me today's date.	Easy	Moder
+Single-App	Proton Calendar	107	8	Set your out of office status from Friday through Monday.	Med	Complex
+Single-App	Proton Calendar	108	12	Schedule the meeting for next Friday at 7 pm.	Hard	Moder
+Single-App	Weather smart-pro android apps	109	4	Provide the weather forecast for Suzhou for today, tomorrow, and next Tuesday.	Easy	Complex
+Single-App	Proton Calendar	110	8	Confirm that next Monday is an all-day holiday. And if not, add holiday event	Med	Complex
+Single-App	Uber	111	16	Book a taxi from Walt Disney Family Museum to Coit Tower at 14:45 with any car type.	Hard	Moder
+Single-App	Booking.com	112	35	Find 2 non-smoking family hotel rooms near Tin How Temple with facilities for disabled guests and a coffee/tea maker for 3 adults and a 17-year-old, checking in 5 days from now for 3 nights, with a budget of $116??174 per night, choosing the most popular option.	Hard	Moder
+Single-App	Proton Calendar	113	11	"Book ""free time"" from 3 to 4 pm today."	Med	Moder
+Single-App	Weather Forecast: Live Weather	114	3	Provide the weather forecast including temperature, cloudiness, and the chance of rain for this afternoon.	Easy	Complex
+Single-App	Proton Calendar	115	4	Create an event to go out for beers on Monday.	Easy	Complex
+Single-App	Proton Calendar	116	4	Add a trip to the schedule.	Easy	Complex
+Single-App	Proton Calendar	117	8	"Schedule an appointment titled ""meet my dentist"" for today at 7 pm."	Med	Moder
+Single-App	Proton Calendar	118	10	Add to the schedule a dress appointment with the bridal shop on Friday at 5 pm to get fitted for your bridesmaids dress for your sister's wedding.	Med	Moder
+Single-App	Proton Calendar	119	11	Schedule snowboarding for Saturday at 3:00 PM on the calendar.	Med	Complex
+Single-App	Proton Calendar	120	16	Make an appointment on Monday, October 25th from 10 to 11 am and add it to the calendar.	Hard	Complex
+Single-App	Proton Calendar	121	7	Set your out of office status from Friday through Monday.	Med	Complex
+Single-App	Booking.com	122	30	Book a family room at The Wharf Inn near Amoeba Music for one adult and one child under a year old, with free WIFI, private bathroom, and free parking, for 3 days starting Nov 3, within a budget of $174-$232 per day.	Hard	Complex
+Single-App	Uber	123	16	Book an UberX taxi from The Saloon to The Great Pacific Tour Co. departing at 19:15, today	Hard	Moder
+Single-App	Simple Calendar	124	3	Provide the current date, which is Thursday, October 21, 2021.	Easy	Complex
+Single-App	Weather: Live radar & widgets	125	2	Provide today's hourly weather forecast for Shanghai and indicate if there is any chance of rain or tornadoes.	Easy	Moder
+Single-App	Google Calendar	126	13	Create a wrestling meet on Monday at 5am.	Hard	Moder
+Single-App	Weather: Live radar & widgets	127	7	Provide the weather forecast for Shanghai on Tuesday, Wednesday, and Thursday, including the chance of rain for each day.	Med	Complex
+Single-App	Weather Forecast: Live Weather	128	4	Provide the current weather, the forecast for the next day including whether it will be rainy, and attempt to find information on rain duration and the air quality.	Easy	Complex
+Single-App	Simple Calendar	129	2	Open Simple Calender app, and provide the today's date.	Easy	Moder
+Single-App	Uber	130	9	Book the cheapest taxi from HRD Coffee Shop to San Francisco Deluxe Sightseeing - Private Tour immediately.	Med	Moder
+Single-App	Weather Forecast: Live Weather	131	5	Provide today's weather in Paris, France.	Med	Complex
+Single-App	Proton Calendar	132	16	"Create an event called ""soccer games"" from 12 to 4 pm on Saturday."	Hard	Complex
+Single-App	Uber	133	16	Book the cheapest taxi from San Francisco Magic Show to Philz Coffee at 16:30 at Nov 1.	Hard	Moder
+Single-App	Proton Calendar	134	12	Create a football game event on Tuesday at 8 PM in the calendar.	Hard	Complex
+Single-App	Daily Forecast: Weather & Radar	135	3	Provide today's weather, a three-day forecast, and check for any snow in the forecast this week for Suzhou.	Easy	Complex
+Single-App	Simple Calendar	136	3	Provide the current date.	Easy	Complex
+Single-App	Daily Forecast: Weather & Radar	137	8	Provide the weather forecast for Waycross this weekend, including temperature, chance of rain for Saturday and Sunday, and whether it will rain on those days.	Med	Complex
+Single-App	Uber	138	16	Book a taxi from Project Zen Massage and Bodywork to EscapeSF for immediate departure with any available car type.	Hard	Moder
+Single-App	Uber	139	16	Book a taxi from Beach Chalet to San Francisco Zoo to leave now with any car type.	Hard	Moder
+Single-App	Proton Calendar	140	10	Schedule a tuxedo fitting appointment for tomorrow at 5pm.	Med	Complex
+Single-App	Proton Calendar	141	14	Make an appointment for tomorrow at 9 am to see the dentist and add it to my calendar.	Hard	Complex
+Single-App	Weather Forecast: Live Weather	142	7	Provide today's weather details including temperature, humidity, and forecast for the weekend.	Med	Complex
+Single-App	Proton Calendar	143	8	Set your status to busy all day Friday.	Med	Complex
+Single-App	Weather: Live radar & widgets	144	2	Check if the temperature will go above 100 degrees today and provide the maximum temperature.	Easy	Moder
+Single-App	Uber	145	16	Book an UberX taxi from Baker Beach to the San Francisco Maritime National Historical Park ships at Hyde Street Pier for immediate departure.	Hard	Moder
+Single-App	Proton Calendar	146	23	Schedule tonight from 6 to 9 PM for a movie date and schedule dinner at 5 PM on Sunday.	Hard	Complex
+Single-App	Proton Calendar	147	12	Create a basketball game on Thursday at 8 AM and add it to the calendar.	Hard	Complex
+Single-App	Weather: Live radar & widgets	148	13	Provide the current weather in Beijing including temperature, sunset time, and rain forecast for this week in both Beijing and Shanghai.	Hard	Moder
+Single-App	Proton Calendar	149	8	Set your status to Busy for the entire day on Wednesday.	Med	Complex
+Single-App	Weather smart-pro android apps	150	3	Check if the temperature today is below 10 degrees to determine if it's cool enough to go outside.	Easy	Moder
+Single-App	Proton Calendar	151	9	"Schedule an event titled ""shopping for pets"" for tonight at 6pm."	Med	Complex
+Single-App	Uber	152	16	Book a taxi departing now from Mikkeller Bar SF to Maison Bleu Maxime Le Forestier immediately with any available car type.	Hard	Moder
+Single-App	Proton Calendar	153	16	Add a meeting to the calendar on Monday, October 18th from 2 pm to 4 pm and set the status to Busy.	Hard	Complex
+Single-App	Proton Calendar	154	15	Add a basketball game event from 7 pm to 8:30 pm on Saturday to my calendar.	Hard	Complex
+Single-App	Proton Calendar	155	11	Set up camping for Sunday at 8pm and mark the status as Busy on the calendar.	Med	Complex
+Single-App	Proton Calendar	156	4	Create an event for my daughter's birthday today.	Easy	Complex
+Single-App	Proton Calendar	157	11	Add a hair salon appointment at 2 pm on Friday to my calendar.	Med	Complex
+Single-App	Uber	158	16	Book a taxi from Silver Lion Service - Tours to Society Cabaret at 19:30 with any car type.	Hard	Moder
+Single-App	Proton Calendar	159	17	Create a baseball game event on Monday from 5 PM to 9 PM on the calendar.	Hard	Complex
+Single-App	Proton Calendar	160	19	Schedule a trip to Washington, DC from next Monday to Thursday and create an all-day event for sightseeing on the 21nd.	Hard	Complex
+Single-App	Proton Calendar	161	2	Provide today's date.	Easy	Complex
+Single-App	Proton Calendar	162	5	Schedule the appointment or event for any day except Friday, as you are busy all day Friday.	Med	Complex
+Single-App	Uber	163	16	Book an Uber X taxi from Angel Island State Park to Brick & Mortar Music Hall departing now.	Hard	Moder
+Single-App	Google Calendar	164	18	"Create a 3-day event called ""learning to follow prompts"" starting today and an all-day event to visit parents on Wednesday."	Hard	Complex
+Single-App	Proton Calendar	165	11	Mark this afternoon as busy.	Med	Moder
+Single-App	Proton Calendar	166	2	Open Proton Calender app, show me today's date.	Easy	Moder
+Single-App	Uber	167	16	Book a taxi from San Francisco Marriott Marquis to Golden Gate Fortune Cookies Co. at 15:00 with any car type.	Hard	Moder
+Single-App	Daily Forecast: Weather & Radar	168	8	Provide a 7-day weather forecast including temperature, humidity, and chance of rain for my location, Suzhou.	Med	Complex
+Single-App	Proton Calendar	169	8	"Add an event ""sitting on the dock by the bay"" at 5 pm to my calendar and set my status to Busy."	Med	Complex
+Single-App	Proton Calendar	170	11	Schedule a meeting event for Wednesday at noon.	Med	Moder
+Single-App	Booking.com	171	32	Find 2 air-conditioned hotel rooms near Kite Hill Open Space for 3 adults with a budget of $130-$173 per day, for 1 night starting 10 days later, including free WiFi, airport shuttle service, a pool, and choose the lowest rated option available.	Hard	Complex
+Single-App	Proton Calendar	172	8	Set an out of office event on Monday at 5 pm.	Med	Moder
+Single-App	Proton Calendar	173	2	Open Proton Calender app, Show the screen that displays the current date.	Easy	Complex
+Single-App	Proton Calendar	174	7	Schedule bar hopping for October 20 at 7 pm.	Med	Complex
+Single-App	Proton Calendar	175	8	Schedule a meeting for 5pm and add it to the calendar.	Med	Complex
+Single-App	Simple Calendar	176	2	Tell me the current date.	Easy	Moder
+Single-App	Proton Calendar	177	4	Schedule a party today.	Easy	Complex
+Single-App	Proton Calendar	178	15	Set Out of Office from 9am to 12pm on Tuesday.	Hard	Moder
+Single-App	Proton Calendar	179	12	Set an out-of-office status from November 10th to November 14th.	Hard	Complex
+Single-App	Uber	180	16	Book a taxi from Anchor Oyster Bar Seafood Market to Lush Gelato at 10:15 with any car type.	Hard	Moder
+Single-App	Weather Forecast: Live Weather	181	10	Provide the current weather conditions for Suzhou including temperature and wind speed, and for Beijing including temperature and weather description.	Med	Complex
+Single-App	Uber	182	16	Book a taxi from the Chinese Historical Society of America to Allegro Romano departing at 18:15 with any available car type.	Hard	Moder
+Single-App	Proton Calendar	183	4	Create an event for my birthday.	Easy	Complex
+Single-App	Proton Calendar	184	17	Create a meeting on Monday from 1 PM to 4 PM.	Hard	Complex
+Single-App	Proton Calendar	185	7	Update your calendar for today to include a dentist appointment at 1 PM.	Med	Complex
+Single-App	Weather: Live radar & widgets	186	2	Provide the current weather report for Shanghai.	Easy	Moder
+Single-App	Google Calendar	187	5	"Add a meeting called ""Catching Up""."	Med	Complex
+Single-App	Proton Calendar	188	2	Provide the current date.	Easy	Complex
+Single-App	Proton Calendar	189	9	"Create an event called ""family time"" on Sunday at 12 pm."	Hard	Complex
+Single-App	Uber	190	17	Book a taxi from Vin Ambassador to Bliss Athletica at 9:30 with any available car type.	Hard	Moder
+Single-App	Proton Calendar	191	7	Schedule find a creative book suitable for school by Friday.	Med	Complex
+Single-App	Proton Calendar	192	8	Add an event to your calendar at 8pm.	Med	Complex
+Single-App	Google Calendar	193	15	Add an architectural discussion to the calendar today at 4:00 PM and another one tomorrow at 2:00 PM.	Hard	Complex
+Single-App	Uber	194	17	Book a taxi from Vin Ambassador to Bliss Athletica at 9:30 with any available car type.	Hard	Moder
+Single-App	Daily Forecast: Weather & Radar	195	7	Provide a detailed weather forecast including temperature, wind speed, humidity, and conditions for today, tomorrow, and the week.	Med	Complex
+Single-App	Uber	196	16	Book a taxi from Sea Lion Center to Urban Putt immediately with any available car type.	Hard	Moder
+Single-App	Weather: Live radar & widgets	197	8	Provide a weather forecast for Suzhou, including the chance of rain tomorrow, the general weather conditions for today, and whether there will be any sunny days this week.	Med	Complex
+Single-App	Proton Calendar	198	8	Set up a reminder to send a birthday card to mom on October 28.	Med	Complex
+Single-App	Weather: Live radar & widgets	199	9	Provide a detailed weather forecast including chance of rain, temperatures, current rain status, sunset time, maximum weekday temperature, and cloud cover for tomorrow and next Monday.	Med	Complex
+Single-App	Proton Calendar	200	7	Add a new calendar event for the Nothing Rhymes with Orange concert on October 20th	Med	Complex
+Single-App	Booking.com	201	32	Book a family room with a private washroom and BBQ facilities near Restaurant Gary Danko for one adult and one 17-year-old child, for 2 days starting 11 days from now, within a budget of $174-$232 per day, selecting the option with the best review rating.	Hard	Moder
+Single-App	Proton Calendar	202	12	Set a vet appointment for 10 a.m. on Tuesday.	Hard	Complex
+Single-App	Proton Calendar	203	8	Add an appointment with your doctor for tomorrow and set it as an all-day event.	Med	Complex
+Single-App	Proton Calendar	204	8	Create a wine event for tomorrow.	Med	Complex
+Single-App	Proton Calendar	205	8	Schedule a meeting on next Friday.	Med	Complex
+Single-App	Proton Calendar	206	7	Schedule a haircut appointment at 13:30pm	Med	Complex
+Single-App	Proton Calendar	207	10	"Create a calendar event titled ""Broadway Show"" for 7pm this Saturday."	Med	Complex
+Single-App	Google Calendar	208	9	Schedule a call with mom about lunch tonight at 6 pm.	Med	Moder
+Single-App	Proton Calendar	209	31	"Create an all-day event labeled ""Vegas"" from the 22nd to the 28th of this month, mark that you will be in meetings from the 25th to the 31st, and add a weekend-long all-day event for going to the mall."	Hard	Complex
+Single-App	Weather: Live radar & widgets	210	4	Check the weather forecast for next Monday at the Shanghai Convention Center for the conference.	Easy	Complex
+Single-App	Booking.com	211	23	Book a hotel near Elephant Sushi for one adult with one room, check-in today for 3 days, budget $0-$58 per day, with free wifi, parking, and air conditioning, and select the cheapest option available.	Hard	Complex
+Single-App	Proton Calendar	212	22	Add an all-day event named ?쐔he upcoming session??for the weekend and a 4-day festival starting October 25th to my planner.	Hard	Complex
+Single-App	Proton Calendar	213	15	"Create an event called ""dinner with family"" from 6 to 8 pm on Tuesday."	Hard	Moder
+Single-App	Proton Calendar	214	8	Add an event on the calendar for me to play soccer on Tuesday.	Med	Complex
+Single-App	Weather smart-pro android apps	215	4	Provide the current weather with temperature and rain chances, and forecast this week's weather.	Easy	Moder
+Single-App	Proton Calendar	216	30	Create calendar events on November 13th from 1pm to 3pm, November 29th at 8:45am, and an all-day event on November 21st.	Hard	Complex
+Single-App	Proton Calendar	217	2	Tell the user today's date.	Easy	Complex
+Single-App	Proton Calendar	218	12	Create a football game event on Tuesday at 5 PM and add it to the calendar.	Hard	Complex
+Single-App	Simple Calendar	219	8	Set a reminder to buy turkey tomorrow.	Med	Moder
+Single-App	Weather: Live radar & widgets	220	21	Provide current weather conditions for Shanghai and Beijing, forecast temperatures and rain chances in Shanghai, Suzhou, and Beijing for tomorrow and next week	Hard	Complex
+Single-App	Weather smart-pro android apps	221	10	Provide current weather conditions in Suzhou and San Francisco, including temperature, cloud cover, and sunset time in San Francisco.	Med	Complex
+Single-App	Proton Calendar	222	16	Place a trip to India on the calendar from today to next week Friday and create an event starting Monday that lasts for 9 days.	Hard	Complex
+Single-App	Uber	223	16	Book a taxi from Alemany Flea Market to Jamba Juice to leave immediately with any available car type.	Hard	Moder
+Single-App	Weather Forecast: Live Weather	224	10	Provide the temperature and cloud cover at 3 AM tomorrow, today's low temperature, and today's sunset time.	Med	Complex
+Single-App	Proton Calendar	225	7	Schedule a Soccer practice at 5 pm.	Med	Complex
+Single-App	Proton Calendar	226	7	"Add an event called ""dinner with the family!"" on Thursday."	Med	Complex
+Single-App	Uber	227	16	Book a taxi from the Chinese Historical Society of America to Lincoln Park Golf Course to leave immediately, with any available car type.	Hard	Moder
+Single-App	Proton Calendar	228	9	Schedule a meeting on Monday at 2 pm and add it to my calendar.	Med	Complex
+Single-App	Uber	229	17	Book a taxi from Sundance Kabuki Cinema to Silver Lion Service - Tours at 10:00 with any available car type.	Hard	Moder
+Single-App	Google Calendar	230	2	Provide today's date.	Easy	Moder
+Single-App	Proton Calendar	231	7	Add a family dinner for tomorrow in the calendar.	Med	Complex
+Single-App	Proton Calendar	232	19	"Schedule an event titled ""my sabbatical"" from February 5th to June 23rd."	Hard	Complex
+Single-App	Proton Calendar	233	11	Create a 30-minute event starting at noon tomorrow on my calendar.	Med	Complex
+Single-App	Proton Calendar	234	8	Create an event to buy a pet on Tuesday.	Med	Complex
+Single-App	Proton Calendar	235	12	Set a dentist appointment for Wednesday at 2:30 pm.	Hard	Complex
+Single-App	Weather: Live radar & widgets	236	10	Provide today's and tomorrow's weather forecast for Harrison, Arkansas.	Med	Complex
+Single-App	Proton Calendar	237	11	Schedule a doctor appointment for 9 am on Thursday.	Med	Complex
+Single-App	Proton Calendar	238	4	Add a calendar event for swimming lessons today.	Easy	Complex
+Single-App	Booking.com	239	23	Find a hotel near Crooks Tour San Francisco for one adult with check-in on December 1 for 2 nights, within a budget of $174??232 per day, that has a spa and a room with a bathtub, selecting the property with the highest review score.	Hard	Complex
+Single-App	Proton Calendar	240	12	Create a work meeting on Tuesday at 5 PM and add it to the calendar.	Hard	Complex
+Single-App	Weather: Live radar & widgets	241	2	Provide the current weather for Suzhou.	Easy	Moder
+Single-App	Simple Calendar	242	3	Provide today's date.	Easy	Complex
+Single-App	Uber	243	16	Book a taxi from San Francisco Deluxe Sightseeing - Private Tour to Omescape at 17:00 with any available car type.	Hard	Moder
+Single-App	Weather Forecast: Live Weather	244	4	Tell me if it will rain today and whether it will rain around 9 AM tomorrow.	Easy	Complex
+Single-App	Weather: Live radar & widgets	245	2	Provide the current weather in Shanghai.	Easy	Moder
+Single-App	Yelp	246	19	Reserve a restaurant near The Sports Club or LA Splash that serves noodles for lunch, has gender-neutral restrooms, and offers takeout.	Hard	Moder
+Single-App	Weather: Live radar & widgets	247	3	Provide today's weather forecast including cloud conditions and temperature range.	Easy	Complex
+Single-App	Proton Calendar	248	9	Create an event for a manager meeting at 9 PM on Monday.	Med	Complex
+Single-App	Gmail	249	4	In Gmail app, Archive the last email from Sophia	Easy	Complex
+Single-App	Gmail	250	5	In Gmail app, Mark the second email from cps lab kaist as important	Med	Complex
+Single-App	Gmail	251	8	In Gmail app, Recover the last deleted email from trash	Med	Moder
+Single-App	Gmail	252	8	In Gmail app, Recover the last deleted email from trash	Med	Complex
+Single-App	Gmail	253	4	In Gmail app, Archive the last email from cps lab kaist	Easy	Complex
+Single-App	Gmail	254	4	In Gmail app, Delete the last email from Sophia	Easy	Complex
+Single-App	Gmail	255	4	In Gmail app, Delete the second email from cps lab kaist	Easy	Complex
+Single-App	Gmail	256	3	In Gmail app, Show me all the promotional emails	Easy	Complex
+Single-App	Google Dialer	257	6	In Google Dialer app, Add Zelenski to the favorites	Med	Complex
+Single-App	Google Dialer	258	9	In Google Dialer app, Delete Zelenski from the contact	Med	Moder
+Single-App	Google Dialer	259	3	In Google Dialer app, See call history	Easy	Moder
+Single-App	Google Dialer	260	5	In Google Dialer app, Tell me who?셲 in the favorites and add Sophia to the favorites	Med	Moder
+Single-App	Google Dialer	261	5	In Google Dialer app, Tell me who?셲 in the favorites and add Jun to the favorites	Med	Moder
+Single-App	Google Dialer	262	9	In Google Dialer app, Modify Zelenski?셲 phone number to 01055833154	Med	Complex
+Single-App	Google Dialer	263	7	In Google Dialer app, Modify Jun?셲 phone number to 01055553333	Med	Moder
+Single-App	Google Dialer	264	6	In Google Dialer app, Open Zelenski?셲 contact info	Med	Complex
+Single-App	Google Dialer	265	4	In Google Dialer app, Open Jun?셲 contact info	Easy	Complex
+Single-App	Google Dialer	266	5	In Google Dialer app, Remove Zelenski from the favorites	Med	Simple
+Single-App	Google Dialer	267	6	In Google Dialer app, Add Sophia to the favorites	Med	Complex
+Single-App	Google Dialer	268	6	In Google Dialer app, Remove Sophia from the favorites	Med	Complex
+Single-App	Google Dialer	269	5	In Google Dialer app, Call Junyoung from the contacts	Med	Moder
+Single-App	Google Dialer	270	7	In Google Dialer app, Call Zelenski from the contacts	Med	Complex
+Single-App	Google Dialer	271	4	In Google Dialer app, Call most recent call	Easy	Moder
+Single-App	Google Dialer	272	5	In Google Dialer app, Call second one in the recent call	Med	Moder
+Single-App	Google Dialer	273	7	In Google Dialer app, Delete Junyoung from the Contact	Med	Moder
+Single-App	Microsoft To-Do	274	11	In Microsoft To-Do app, Add cs201 to-do list to homework group	Med	Simple
+Single-App	Microsoft To-Do	275	4	In Microsoft To-Do app, Mark Assignment1 in CS101 as important	Easy	Simple
+Single-App	Microsoft To-Do	276	4	In Microsoft To-Do app, Mark Lecture 1 in TA as important	Easy	Simple
+Single-App	Microsoft To-Do	277	6	In Microsoft To-Do app, Modify the due date of the Lecture 1 in TA to tomorrow	Med	Simple
+Single-App	Microsoft To-Do	278	6	In Microsoft To-Do app, Remind me Assignment 1 in CS101 later today	Med	Simple
+Single-App	Microsoft To-Do	279	6	In Microsoft To-Do app, Remind me Lecture 1 in TA Tomorrow	Med	Simple
+Single-App	Microsoft To-Do	280	3	In Microsoft To-Do app, Tell me what is in my CS101 to do list	Easy	Simple
+Single-App	Microsoft To-Do	281	11	In Microsoft To-Do app, Add Lab to-do list to School group	Med	Simple
+Single-App	Microsoft To-Do	282	3	In Microsoft To-Do app, Tell me what is in my TA to do list	Easy	Simple
+Single-App	Microsoft To-Do	283	7	In Microsoft To-Do app, Create a new group called School and add TA to the group	Med	Simple
+Single-App	Microsoft To-Do	284	12	In Microsoft To-Do app, Create a new to-do list called CS201, add a task called Assignment 2 due next week and remind me Later today	Hard	Simple
+Single-App	Microsoft To-Do	285	12	In Microsoft To-Do app, Create a new to-do list called Lab, add a task called scholarship due tomorrow and remind me later today	Hard	Simple
+Single-App	Telegram	286	4	In Telegram app, Find people nearby	Easy	Moder
+Single-App	Telegram	287	6	In Telegram app, Open Chat with Bob	Med	Moder
+Single-App	Telegram	288	6	In Telegram app, Open Chat with John	Med	Moder
+Single-App	Telegram	289	10	In Telegram app, Send message to Bob	Med	Simple
+Single-App	Telegram	290	7	In Telegram app, Create new group with John	Med	Moder
+Single-App	Telegram	291	9	In Telegram app, Delete chat with John	Med	Moder
+Single-App	Calculator	292	7	Open the calculator and perform 2^13	Med	Moder
+Single-App	Snapchat	293	3	Open Snapchat and take a photo.	Easy	Moder
+Single-App	Snapchat	294	4	Open Snapchat spotlight page and like the first video.	Easy	Moder
+Single-App	Snapchat	295	3	Open Snapchat and turn to the personal profile page.	Easy	Moder
+Single-App	Discord	296	9	Withdraw the permission of the Discord app to use data to customize my Discord experience.	Med	Moder
+Single-App	Snapchat	297	4	Take a photo in Snapchat and save it to your Memories.	Easy	Moder
+Single-App	Discord	298	6	Set my DM Spam filter to 'Do not filter direct messages' on Discord app.	Med	Moder
+Single-App	Pinterest	299	7	"Open Pinterest and search a user named ""Wendy's Lookbook"" and follow the user."	Med	Moder
+Single-App	Pinterest	300	4	Navigate to the settings menu in Piniterest.	Easy	Moder
+Single-App	Pinterest	301	6	"Create a new board named ""DIY Crafts"" on Pinterest."	Med	Moder
+Single-App	Pinterest	302	5	Open Pinterest and copy the link of fisrt content from the 'Home' page.	Med	Moder
+Single-App	Pinterest	303	5	Open Pinterest and save the first pin from the 'Home' page to your Profile.	Med	Moder
+Single-App	Pinterest	304	4	Open Pinterest and view the comments of a first pin from the 'Home' page.	Easy	Complex
+Single-App	Pinterest	305	4	Open Pinterest and open your own profile page.	Easy	Moder
+Single-App	Pinterest	306	6	Open Pinterest, open your own profile page and copy the shared link of yourself.	Med	Complex
+Single-App	Pinterest	307	5	Open Pinterest, open your own profile page and view your following list.	Med	Moder
+Single-App	Pinterest	308	3	Open Pinterst and refresh the 'Home' page to see new pins by clicking the 'Home' button again.	Easy	Simple
+Single-App	Pinterest	309	4	Open Pinterest and open one of your own board.	Easy	Moder
+Single-App	Pinterest	310	3	View 'Updates' in the 'Notifications' page in Pinterest.	Easy	Simple
+Single-App	Pinterest	311	4	View 'Inbox' in the 'Notifications' page in Pinterest.	Easy	Simple
+Single-App	Pinterest	312	6	Open Pinterest and set your profile visibility to 'Private profile' in the settings menu.	Med	Simple
+Single-App	Pinterest	313	6	"Open Pinterest and search ""DIY"" in your own board list and open it."	Med	Simple
+Single-App	Pinterest	314	5	Logout of the Pinterest app.	Med	Moder
+Single-App	Trello	315	6	"Open the Trello app and create a new board named ""School""."	Med	Simple
+Single-App	Trello	316	6	"Open the Trello app and add a new list titled ""To Do"" to the ""School"" board."	Med	Simple
+Single-App	Trello	317	6	"Open the Trello app, add a new card titled ""Task 1"" to the ""To Do"" list in the ""School"" board."	Med	Simple
+Single-App	Trello	318	5	"Open the Trello app and archive a list named ""To Do"" in the ""School"" board."	Med	Simple
+Single-App	Trello	319	5	Open the Trello app, search the ?쏻ebsite??and select the card from the results.	Med	Simple
+Single-App	Trello	320	6	"Open the Trello app and set a due date for a card in the ""School"" board."	Med	Moder
+Single-App	Trello	321	8	"Open the Trello app, open a ""school"" board, select a card, and post a comment saying “Hello.”"	Med	Moder
+Single-App	Trello	322	5	"Open the Trello app and search for a board by the name ""Team Goals""."	Easy	Simple
+Single-App	Trello	323	6	"Open the Trello app, open a ""school"" board and copy the board link."	Med	Moder
+Single-App	Trello	324	3	Open the Trello app and view the notification list.	Easy	Simple
+Single-App	Trello	325	4	Open the Trello app and navigate to the 'Settings' page.	Easy	Moder
+Single-App	Trello	326	6	Open the Trello app and switch to the dark theme in the settings.	Med	Moder
+Single-App	Trello	327	7	"Open the Trello app and create a new board using the ""Basic Board"" template."	Med	Moder
+Single-App	Trello	328	3	"Open the Trello app and navigate to the ""Workspace"" menu."	Easy	Simple
+Single-App	Trello	329	4	"Open the Trello app and enable the ""Color blind friendly mode"" in the settings menu."	Easy	Moder
+Single-App	Trello	330	4	"Open the Trello app and view the ""Offline boards"" list."	Easy	Moder
+Single-App	DoorDash	331	5	Search for Korean food on DoorDash app.	Med	Complex
+Single-App	Trello	332	5	Log out of the Trello app.	Med	Simple
+Single-App	Instagram	333	3	Open the Instagram app and view the notification list.	Easy	Complex
+Single-App	Instagram	334	4	Open the Instagram app and like the first post in the page.	Easy	Moder
+Single-App	Instagram	335	3	Open the Instagram app and navigate to your personal profile page.	Easy	Complex
+Single-App	Instagram	336	4	Open the Instagram app, navigate to your personal profile page and view your following list.	Easy	Complex
+Single-App	Instagram	337	4	"Open the Instagram app and navigate to ""Settings""."	Easy	Complex
+Single-App	DoorDash	338	5	Clear my cart on DoorDash app.	Med	Complex
+Single-App	DoorDash	339	5	Check available coffee under 30 min on DoorDash app.	Med	Complex
+Single-App	Instagram	340	3	Open the Instagram app and follow the user of first post .	Easy	Simple
+Single-App	Instagram	341	4	Open the Instagram app, navigate to your personal profile page and view your 'followers' list.	Easy	Complex
+Single-App	Instagram	342	5	"Open the Instagram app, navigate to your personal profile page, go to ""Settings"" and view the ""Blocked"" list."	Med	Complex
+Single-App	Instagram	343	5	"Open the Instagram app, navigate to your personal profile page, go to ""Settings"" and view the ""Close Friends"" list."	Med	Complex
+Single-App	Instagram	344	5	"Open the Instagram app, navigate to your personal profile page, go to ""Settings"" and view the ""Archive"" list."	Med	Complex
+Single-App	Yelp	345	7	Search for the best Korean restaurant near me on Yelp.	Med	Moder
+Single-App	Yelp	346	8	Search for barber shop near me on Yelp.	Med	Complex
+Single-App	Amazon Shopping	347	8	Create a new shopping list 'electronic' for my personal account on Amazon Shopping app.	Med	Complex
+Single-App	Amazon Shopping	348	4	Check my recent order status on Amazon Shopping app.	Easy	Complex
+Single-App	Amazon Shopping	349	5	Find a grocery store and choose 'shop for pickup' near me at Amazon Shopping app.	Med	Complex
+Single-App	Spotify	350	7	Create a playlist for a road trip in Spotify.	Med	Moder
+Single-App	Walmart	351	9	Add organic milk to my cart for pickup tomorrow on Walmart app.	Med	Complex
+Single-App	Walmart	352	6	Add eggs to my cart on Walmart app.	Med	Complex
+Single-App	Walmart	353	7	Create a new list 'weekly grocery' on Walmart app.	Med	Moder
+Single-App	Walmart	354	3	Check my cart on Walmart app.	Easy	Complex
+Single-App	Walmart	355	6	Remove all items in my cart on Walmart app.	Med	Complex
+Single-App	Walmart	356	4	In page 'Services', view Store map for my store on Walmart app.	Easy	Complex
+Single-App	Walmart	357	4	View my purchase history on Walmart app.	Easy	Moder
+Single-App	Maps	358	13	Start enable navigation in the Maps app directed me to a supermarket near me.	Hard	Moder
+Single-App	Zoom	359	5	On Zoom, delete my scheduled meeting 'regular meeting'.	Med	Simple
+Single-App	Zoom	360	5	On Zoom, go to page 'More', turn to setting item 'Meetings', and turn on 'Mute my microphone'.	Med	Moder
+Single-App	Zoom	361	7	On Zoom, edit my scheduled meeting 'Weekly group meeting', set 'Repeat' to 'Every week'.	Med	Moder
+Single-App	Zoom	362	6	On Zoom, edit my scheduled meeting 'Weekly group meeting', turn 'Enable waiting room' on.	Med	Moder
+Single-App	DoorDash	363	5	On DoorDash, explore breakfast category, select 'under 30 min', go to the first result.	Med	Complex
+Single-App	DoorDash	364	4	On DoorDash, go to account page and click 'Saved' to check saved stores.	Easy	Complex
+Single-App	DoorDash	365	4	On DoorDash, turn to page grocery, and select 'view all stores'.	Easy	Complex
+Single-App	DoorDash	366	5	On DoorDash, turn to page Retail, select category 'Flowers', and go to the first result.	Med	Complex
+Single-App	DoorDash	367	4	On DoorDash, turn to the first one of saved stores, and add the most liked item to my cart.	Easy	Complex
+Single-App	DoorDash	368	6	On DoorDash, turn to the first one of saved stores, start a group order and copy its link.	Med	Complex
+Single-App	Clock	369	3	Show me the alarms in the clock app	Easy	Simple
+Single-App	Clock	370	7	Set a timer for 20 minutes.	Med	Moder
+Single-App	YouTube	371	5	Open YouTube, search for openai and subscribe it	Med	Moder
+Single-App	YouTube	372	5	Open YouTube, visit the 'Subscriptions' tab, view content from the openai	Med	Moder
+Single-App	YouTube	373	3	Open YouTube, check out the 'Shorts' section, play any short video	Easy	Simple
+Single-App	YouTube	374	3	Open YouTube, go to Notifications	Easy	Simple
+Single-App	YouTube	375	4	"Open YouTube, go to 'My Channel', view the 'More info"""	Easy	Simple
+Single-App	CNN	376	4	On CNN app, turn to page 'Listen', click and start playing CNN News Central.	Easy	Moder
+Single-App	YouTube	377	5	Open YouTube, check Time watched	Med	Complex
+Single-App	YouTube	378	5	Open YouTube, go to 'Help'	Med	Complex
+Single-App	YouTube	379	9	Open YouTube, go to 'Help', search for 'how to upload a video'	Med	Complex
+Single-App	YouTube	380	5	Open YouTube, go to 'Live'	Med	Moder
+Single-App	YouTube	381	5	Open YouTube, go to 'Podcasts'	Med	Moder
+Single-App	Reddit	382	5	Open Reddit, search for the 'technology' subreddit, and access it.	Med	Moder
+Single-App	Reddit	383	6	Open Reddit, search for the 'technology' subreddit and aceess to Communities.	Med	Moder
+Single-App	Reddit	384	6	Open Reddit, search for the 'technology' subreddit and aceess to Media.	Med	Moder
+Single-App	Reddit	385	4	Open Reddit, navigate to your Home feed and select Latest.	Easy	Moder
+Single-App	Reddit	386	3	Open Reddit, navigate to the Communities.	Easy	Moder
+Single-App	Reddit	387	8	Open Reddit, navigate to the Communities, search for openai and join.	Med	Complex
+Single-App	Reddit	388	4	Open Reddit, navigate to create a community.	Easy	Simple
+Single-App	Reddit	389	3	Open Reddit, navigate to Inbox.	Easy	Moder
+Single-App	Reddit	390	5	Open Reddit, navigate to Notifications setting.	Med	Moder
+Single-App	Reddit	391	3	Open Reddit, navigate to Chat.	Easy	Moder
+Single-App	CNN	392	6	On CNN app, turn to page 'Settings', click 'Edition' and change it to U.S..	Med	Simple
+Single-App	ESPN	393	5	Open ESPN, go to setting and turn on captions.	Med	Simple
+Single-App	ESPN	394	4	Open ESPN, go to setting and check account details.	Easy	Moder
+Single-App	ESPN	395	5	Open ESPN, search nba.	Med	Moder
+Single-App	ESPN	396	3	Open ESPN, navigate to Scores.	Easy	Complex
+Single-App	ESPN	397	7	Open ESPN, remove nba Lakers from your favourite team.	Med	Moder
+Single-App	ESPN	398	7	Open ESPN, add nba Lakers to your favourite team.	Med	Complex
+Single-App	BBC	399	3	Open BBC, go to Explore.	Easy	Moder
+Single-App	BBC	400	5	Open BBC, change the theme to dark mode.	Med	Simple
+Single-App	BBC	401	3	Open BBC, go to Live.	Easy	Simple
+Single-App	YT Music	402	4	Open YT Music, go to Settings.	Easy	Moder
+Single-App	YT Music	403	4	Open YT Music, check my History.	Easy	Complex
+Single-App	YT Music	404	5	Open YT Music, search pop music.	Med	Complex
+Single-App	YT Music	405	5	Open YT Music, search taylor swift.	Med	Complex
+Single-App	YT Music	406	4	Open YT Music, check my channel.	Easy	Moder
+Single-App	YT Music	407	3	Open YT Music, navigate to Explore.	Easy	Moder
+Single-App	YT Music	408	4	Open YT Music, navigate to Explore and go to New releases.	Easy	Complex
+Single-App	Discord	409	4	Check my notifications and view the first one on Discord app.	Easy	Simple
+Single-App	Discord	410	5	Turn to sever 'homework' and turn on 'Allow Direct Messages' on Discord app.	Med	Moder
+Single-App	Discord	411	6	Go to Notification Setting on Discord app.	Med	Moder
+Single-App	Discord	412	5	Go to Settings of server 'Agent Env' on Discord app.	Med	Complex
+Single-App	Discord	413	6	Go to Friend Request Setting of my account on Discord app.	Med	Moder
+Single-App	Yelp	414	4	Go to my notification on Yelp app.	Easy	Moder
+Single-App	Yelp	415	4	Go to page 'More' and turn to my recently viewed on Yelp app.	Easy	Moder
+Single-App	Yelp	416	6	Go to page 'More' and turn to my recently viewed, visit the first one and select 'Yes' for 'recommend this business' on Yelp app.	Med	Moder
+Single-App	Yelp	417	4	Go to page 'More' and turn to 'Activity Feed' on Yelp app.	Easy	Moder
+Single-App	Expedia	418	4	Go to inbox and view my notifications on Expedia app.	Easy	Moder
+Single-App	Expedia	419	4	Go to Settings for my account on Expedia app.	Easy	Complex
+Single-App	Expedia	420	5	Go to Profile for my account and click 'edit' for 'Basic information' on Expedia app.	Med	Complex
+Single-App	Gmail	421	5	Delete one most recent message in the gmail app	Med	Complex
+Single-App	Spotify	422	7	"Like the song ""aruarian dance"" on Spotify."	Med	Complex
+Single-App	Gmail	423	4	Remove spam from my inbox in the gmail app	Easy	Complex
+Single-App	Gmail	424	4	All mails in gmail	Easy	Moder
+Single-App	Gmail	425	6	Move an email to a new category in the gmail app	Med	Moder
+Single-App	Spotify	426	5	Play my liked songs on Spotify	Med	Complex
+Single-App	Expedia	427	17	Book a round-trip flight from New York to Paris, departing on May 5th and returning on May 15th on Expedia.	Hard	Complex
+Single-App	Chrome	428	9	Disable javascript in the site settings	Med	Moder
+Single-App	Expedia	429	11	Explore things to do in Vienna for the last week of December on Expedia.	Med	Complex
+Single-App	Yelp	430	11	Locate and explore a highly-rated seafood restaurant in Lisbon for dinner on Yelp.	Med	Moder
+Single-App	Maps	431	5	Search for the best burger restaurants on Maps	Med	Moder
+Single-App	Zoom	432	8	Start a quick meeting on Zoom and copy invite link.	Med	Moder
+Single-App	Zoom	433	6	Start a quick meeting on Zoom and mute my microphone.	Med	Simple
+Single-App	Zoom	434	7	In Zoom, send myself a message with the text 'Hello, World!' on Team Chat.	Med	Moder
+Single-App	CNN	435	6	Customize my news feed to alert breaking news and US Politics on CNN app.	Med	Moder
+Single-App	CNN	436	8	Find and bookmark an article about the latest developments in electric vehicles on CNN app.	Med	Moder
+Single-App	Walmart	437	14	Add an shopping address to 1625 Plymouth St, Mountain View, CA 94043 with name 'Ian Agent' and phone number 4086414927 on the Walmart app.	Hard	Moder
+Single-App	Walmart	438	7	Check the availability of organic apples at my local Walmart store using the Walmart app.	Med	Complex
+Single-App	Facebook	439	10	Turn on privacy settings to make my profile visible only to friends on the Facebook app.	Med	Complex
+Single-App	Facebook	440	9	Update my Facebook bio with 'Hello World' on Facebook app.	Med	Moder
+Single-App	Simple Calendar	441	4	What's on my calendar for the rest of the month?	Easy	Moder
+Single-App	Amazon Shopping	442	16	Read customer reviews for a 4K television on the Amazon Shopping app.	Hard	Complex
+Single-App	Amazon Shopping	443	19	Create a new list titled 'Birthday Gifts' and add a birthday card to it on the Amazon Shopping app.	Hard	Complex
+Single-App	Coursera	444	9	Audit the course 'Generative AI for Everyone' by DeepLearning.AI starting today on the Coursera app.	Med	Moder
+Single-App	Coursera	445	10	Find all upcoming courses related to Data Science at beginner level on the Coursera app.	Med	Complex
+Single-App	Coursera	446	5	Download the first video lecture for the 'Algorithms, Part I' course to watch offline on the Coursera app.	Med	Moder
+Single-App	Coursera	447	6	Visit the forums for the 'Algorithms, Part I' course and go to discussion for Week 1 on Coursera.	Med	Complex
+Single-App	Discord	448	8	Join the voice channel 'Gaming' in agentian's server on Discord app.	Med	Moder
+Single-App	Discord	449	6	Send text 'Hello World' in text channel 'general' of agentian's server on Discord app.	Med	Moder
+Single-App	Discord	450	4	Copy my invitaion link for new friend request on Discord app.	Easy	Simple
+Single-App	Duolingo	451	5	Claim my daily reward on Duolingo app.	Med	Simple
+Single-App	Duolingo	452	8	Turn off notification by SMS reminder on the Duolingo app.	Med	Moder
+Single-App	Drive	453	11	Upload the latest photo from my device to a new folder named 'Selfie2024' on Google Drive app.	Med	Simple
+Single-App	Drive	454	9	Share the 'Testbed' spreadsheet on Google Drive by copy link, make sure anyone with the link can view.	Med	Simple
+Single-App	Tripadvisor	455	4	In TripAdvisor app, Find me restaurants nearby	Easy	Moder
+Single-App	Tripadvisor	456	4	In TripAdvisor app, Find me restaurants nearby my location.	Easy	Moder
+Single-App	Tripadvisor	457	9	In TripAdvisor app, Search for Primal Steakhouse in Las vegas and read me their reviews	Med	Moder
+Single-App	Tripadvisor	458	3	In TripAdvisor app, See what is in my cart	Easy	Moder
+Single-App	Tripadvisor	459	3	In TripAdvisor app, See what is in my cart.	Easy	Moder
+Single-App	Tripadvisor	460	13	In TripAdvisor app, Find me Luxury hotel in Washington DC from October 20 to October 25 and save it to my trip plan	Hard	Complex
+Single-App	Tripadvisor	461	9	In TripAdvisor app, Find me available hotels in Las vegas from October 15 to October 20	Med	Complex
+Single-App	Twitter	462	7	In Twitter app, Follow Elon Musk	Med	Complex
+Single-App	Twitter	463	6	In Twitter app, Post new tweet saying What up MobiCom	Med	Complex
+Single-App	Twitter	464	5	In Twitter app, Quote Sophia Lee?셲 post on whatup gpt to post a new tweet saying wow, hi Sophia	Med	Complex
+Single-App	Twitter	465	3	In Twitter app, Read replies to my post Hello MobiCom	Easy	Moder
+Single-App	Twitter	466	3	In Twitter app, Tell me whats trending tweets in South Korea	Easy	Complex
+Single-App	Twitter	467	6	In Twitter app, Post a photo	Med	Moder
+Single-App	Twitter	468	6	In Twitter app, Post second photo in the gallery	Med	Complex
+Single-App	Twitter	469	6	In Twitter app, Post new tweet saying Hello MobiCom	Med	Moder
+Single-App	YT Music	470	3	In YT Music app, pause music	Easy	Complex
+Single-App	YT Music	471	6	In YT Music app, Play me music by Beatles	Med	Complex
+Single-App	YT Music	472	5	In YT Music app, Play me music by BTS	Med	Complex
+Single-App	YT Music	473	5	In YT Music app, Play the music titled Let it be	Med	Complex
+Single-App	YT Music	474	5	In YT Music app, Play the music titled Hey Jude	Med	Complex
+Single-App	YT Music	475	5	In YT Music app, Play my playlist called classic	Med	Complex
+Single-App	YT Music	476	5	In YT Music app, play my playlist called metal	Med	Complex
+Single-App	YT Music	477	4	In YT Music app, play me musics for workout	Easy	Moder
+Single-App	YT Music	478	4	In YT Music app, play me musics for relax	Easy	Moder
+Single-App	YT Music	479	2	In YT Music app, What is the name of the song currently playing	Easy	Moder
+Single-App	YT Music	480	7	In YT Music app, Add a comment saying great song to the currently playing song	Med	Moder
+Single-App	YT Music	481	2	In YT Music app, What song is playing now	Easy	Moder
+Single-App	YT Music	482	7	In YT Music app, Add a song by Guns n Roses to my playlist metal	Med	Complex
+Single-App	YT Music	483	4	In YT Music app, give like to the currently playing song	Easy	Simple
+Single-App	YT Music	484	3	In YT Music app, pause music	Easy	Complex
+Multi-App	Files, Chrome	485	10	Open the file task.html in Downloads in the file manager; when prompted open it with Chrome. Then navigate the X to the bottom-right cell, by using the direction buttons.	Med	Simple
+Multi-App	Files, Chrome	486	13	Open the file task.html in Downloads in the file manager; when prompted open it with Chrome. Then click the button 5 times, remember the numbers displayed, and enter their product in the form.	Hard	Simple
+Multi-App	Gallery, Expense	487	23	Add the expenses from expenses.jpg in Simple Gallery Pro to pro expense.	Hard	Simple
+Multi-App	Markor, Expense	488	19	Go through the transactions in my_expenses.txt in Markor. Log the reimbursable transactions in the arduia pro expense.	Hard	Moder
+Multi-App	Gallery, Markor	489	9	"Create a file in Markor, called receipt.md with the transactions from the receipt.png. Use Simple Gallery to view the receipt. Please enter transactions in csv format including the header ""Date, Item, Amount""."	Med	Simple
+Single-App	Joplin	490	6	Search and display the content of meeting note titled 'Product Launch Preparation' in the Joplin app.	Med	Complex
+Single-App	Joplin	491	8	"Search and display the recipe notes titled ""Fruit Smoothie"" in the Joplin app."	Med	Complex
+Single-App	Joplin	492	4	Navigate to the screen that shows the to-dos I have in the 'ideas' folder in the joplin app.	Easy	Complex
+Single-App	all app	493	3	Open the Youtube app. Clear any pop-ups that may appear by granting all permissions that are required.	Easy	Simple
+Single-App	OsmAnd	494	6	"Add a location marker for ""City of London"" in the OsmAnd maps app."	Med	Simple
+Single-App	Recipe	495	19	Add the following recipes into the Broccoli app: {Recipes}	Hard	Moder
+Multi-App	Gallery, Broccoli	496	22	Add the recipes from recipes.jpg in Simple Gallery Pro to the Broccoli recipe app.	Hard	Moder
+Multi-App	Markor, Recipe	497	25	Add the recipes from recipes.txt in Markor to the Broccoli recipe app.	Hard	Moder
+Multi-App	Markor, Recipe	498	25	Add the recipes from recipes.txt in Markor that take 4 hrs to prepare into the Broccoli recipe app.	Hard	Moder
+Single-App	Recipe	499	17	Add the following recipes into the Broccoli app: {Recipe}	Hard	Moder
+Single-App	Recipe	500	14	Delete the following recipes from Broccoli app: Zucchini Noodles with Pesto, Eggplant Parmesan, Quinoa Salad with Vegetables.	Hard	Simple
+Single-App	Recipe	501	18	Delete the recipes from Broccoli app that use romaine lettuce in the directions.	Hard	Simple
+Single-App	Simple Calendar	502	4	"Navigate to the screen that shows the location of my ""Movie night"" event in Simple Calendar Pro."	Easy	Complex
+Single-App	SportsTracker	503	5	"Search and display  ""running"" activities did I do this week in the OpenTracks app."	Med	Complex
+Single-App	SportsTracker	504	11	Navigate to the screen that shows the activities I did on October 11, then display that screen.	Med	Moder
+Single-App	SportsTracker	505	6	Search and display the screen that shows the total time of my kayaking activity on October 11, then display that screen.	Med	Complex
+Single-App	SportsTracker	506	6	Search and display the screen that shows the longest distance covered in an inline skating activity this week, then display that screen.	Med	Complex
+Single-App	SportsTracker	507	11	Navigate to the screen that shows the total distance covered for climbing activities in the OpenTracks app from Monday to October 11.	Med	Moder
+Single-App	SportsTracker	508	11	Navigate to the screen that shows the total distance covered for climbing activities in the OpenTracks app from Monday to October 11.	Med	Moder
