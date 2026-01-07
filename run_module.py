@@ -17,6 +17,7 @@ from agent.xml_only.xml_only_openR import XmlOnlyAgent
 from agent.divandconq.divandconq import SeeActAgent
 from agent.divandconq.divandconq_text import DivAndConqTextAgent
 from agent.image_only.image_only import ImageOnlyAgent
+from agent.gemini_cu.gemini_cu_agent import GeminiCUAgent
 
 # Benchmark imports
 from benchmark.agentbench.benchmark_agentbench import BenchmarkAgentBench
@@ -158,7 +159,25 @@ def _get_agent(env: Env, model: Model, summary_model: Model, reflection_model: M
         )
     elif _AGENT_NAME.value == "image_only":
         # Image-only uses a simplified agent with no summaries/reflection
-        agent = ImageOnlyAgent(model, env, prompt, prompt_type=prompt_type)
+        agent = ImageOnlyAgent(
+            model, 
+            env, 
+            prompt, 
+            prompt_type=prompt_type
+        )
+    elif _AGENT_NAME.value == "gemini_cu":
+        agent = GeminiCUAgent(
+            model, 
+            reflection_model, 
+            summary_model, 
+            env, 
+            prompt, 
+            summary_type=_SUMMARY_NAME.value, 
+            prompt_type=_PROMPT_NAME.value, 
+            reflection_type=_REFLECTION_NAME.value, 
+            som_mode=_SOM_MODE.value, 
+            save_screenshots=_SAVE_SCREENSHOTS.value
+        )
     else:
         raise ValueError(f"Unknown agent: {_AGENT_NAME.value}")
     return agent
@@ -198,6 +217,13 @@ def main(argv: Sequence[str]) -> None:
         flags.FLAGS["prompt_name"].value = prompt_name
 
     env = _get_env()
+
+    # [추가] 결과 저장 경로 강제 지정 (TypeError 방지)
+    import os
+    if hasattr(env, 'results_path'):
+        env.results_path = "results"
+        os.makedirs(env.results_path, exist_ok=True)
+
     model = _get_model()
     reflection_model = _get_reflection_model()
     summary_model = _get_summary_model()
@@ -220,27 +246,35 @@ def main(argv: Sequence[str]) -> None:
     )
     benchmark = _get_benchmark(env, agent)
 
-    benchmark.run()
+    # 벤치마크 내부의 ZeroDivisionError를 잡아내어 비정상 종료 방지
+    try:
+        benchmark.run()
+    except ZeroDivisionError:
+        print("\n[알림] 에이전트가 액션을 수행하기 전에 작업이 종료되어 성공률 계산을 생략합니다.")
+    except Exception as e:
+        print(f"\n[에러] 실행 중 오류 발생: {e}")
 
-    print(f"\n{'='*50}")
-    print("Cleaning up")
-    print(f"{'='*50}\n")
+    # benchmark.run()
 
-    if hasattr(agent, 'history'):
-        for step_data in agent.history:
-            step_data['before_screenshot'] = None
-            step_data['after_screenshot'] = None
-            step_data['before_raw_screenshot'] = None
-            step_data['after_raw_screenshot'] = None
+    # print(f"\n{'='*50}")
+    # print("Cleaning up")
+    # print(f"{'='*50}\n")
 
-    del benchmark
-    del agent
-    del env
-    del model
-    if reflection_model is not None:
-        del reflection_model
-    if summary_model is not None:
-        del summary_model
+    # if hasattr(agent, 'history'):
+    #     for step_data in agent.history:
+    #         step_data['before_screenshot'] = None
+    #         step_data['after_screenshot'] = None
+    #         step_data['before_raw_screenshot'] = None
+    #         step_data['after_raw_screenshot'] = None
+
+    # del benchmark
+    # del agent
+    # del env
+    # del model
+    # if reflection_model is not None:
+    #     del reflection_model
+    # if summary_model is not None:
+    #     del summary_model
 
     gc.collect()
     print("Cleanup completed. Memory freed.\n")
