@@ -1,1 +1,0 @@
-Record an audio clip using Audio Recorder app and save it
