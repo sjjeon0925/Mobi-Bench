@@ -18,7 +18,7 @@ class GeminiCUAgent(Agent):
         self.last_action = None
 
         # [추가] 환경 데이터셋 규격에 맞는 앱 리스트 세팅
-        self.installed_apps = ["Audio_recorder", "Settings", "Chrome", "Messages", "Phone", "Broccoli"]
+        self.installed_apps = ["Audio_recorder", "Broccoli", "Camera", "Clock", "Contacts", "Expense"]
 
         self.env.results_path = os.path.join(
             "./results", self.name, 
