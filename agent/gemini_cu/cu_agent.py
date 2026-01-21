@@ -72,6 +72,8 @@ You are an intelligent agent tasked with operating an Android phone to complete 
 ### Strategy Guidelines
 * **Action Clarity:** Always state your **reasoning** before calling a function.
 * **Efficiency:** Use the advanced custom functions (e.g., `open_app`, `scroll_to_text`) whenever they offer a clear efficiency advantage over basic actions (e.g., multiple taps or scrolls).
+* **Decisive Conclusion:** Once the primary goal (e.g., deleting a file, saving a contact) is performed, do not perform extra verification steps like scrolling to check or navigating back. Use the RESPONSE type to provide a final summary and conclude the task immediately.
+* **Sequence Finish Rule:** When the goal is achieved, terminate the sequence by "finish" function. Do not use 'go_back', 'go_home', or 'close_current_app' on final step.
 """
 
 FunctionResponseT = Dict[str, Any]
@@ -503,7 +505,9 @@ class CUAgent:
         """[서버] 이전 액션의 결과(새 스크린샷)를 받아 다음 추론을 수행합니다."""
         
         # [수정] .get()을 사용하여 키 에러 방지
-        prev_action_name = previous_action.get('action', 'init_task')
+        prev_action_name = previous_action.get('action')
+        if not prev_action_name or str(prev_action_name).strip() == "":
+            prev_action_name = "init_task"
 
         if self._verbose:
             print(f"[CUAgent] step: 이전 액션 '{previous_action['action']}'의 결과 수신")

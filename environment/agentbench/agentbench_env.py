@@ -25,15 +25,16 @@ class AgentBenchEnv(Env):
         self.finish_mismatch_counter = 0
         self.reflection_stats = {"tp": 0, "tn": 0, "fp": 0, "fn": 0}
         # API 키 환경 변수에서 로드 (OpenAI 전용)
-        api_key = os.environ.get("OPENAI_API_KEY")
+        # api_key = os.environ.get("OPENAI_API_KEY")
         
-        if not api_key:
-            raise ValueError(
-                "OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.\n"
-                "OpenAI API 키를 OPENAI_API_KEY 환경 변수에 설정해주세요."
-            )
+        # if not api_key:
+        #     raise ValueError(
+        #         "OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.\n"
+        #         "OpenAI API 키를 OPENAI_API_KEY 환경 변수에 설정해주세요."
+        #     )
             
-        self.openai_client = OpenAI(api_key=api_key)
+        # self.openai_client = OpenAI(api_key=api_key)
+        self.openai_client = None
 
 
     def reset(self):
@@ -189,31 +190,41 @@ class AgentBenchEnv(Env):
 
     # --- 메인 평가 함수 ---
 
-    def _get_cosine_similarity(self, text1: str, text2: str) -> float:
-        """OpenAI 임베딩을 사용해 두 텍스트의 코사인 유사도를 계산합니다."""
-        if not text1 or not text2:
-            # 두 텍스트가 모두 비어있을 때만 1.0 (일치) 반환
-            return 1.0 if text1 == text2 else 0.0
-        try:
-            response = self.openai_client.embeddings.create(
-                input=[text1, text2],
-                model="text-embedding-3-large"
-            )
-            embedding1 = np.array(response.data[0].embedding)
-            embedding2 = np.array(response.data[1].embedding)
+    # def _get_cosine_similarity(self, text1: str, text2: str) -> float:
+    #     """OpenAI 임베딩을 사용해 두 텍스트의 코사인 유사도를 계산합니다."""
+    #     if not text1 or not text2:
+    #         # 두 텍스트가 모두 비어있을 때만 1.0 (일치) 반환
+    #         return 1.0 if text1 == text2 else 0.0
+    #     try:
+    #         response = self.openai_client.embeddings.create(
+    #             input=[text1, text2],
+    #             model="text-embedding-3-large"
+    #         )
+    #         embedding1 = np.array(response.data[0].embedding)
+    #         embedding2 = np.array(response.data[1].embedding)
             
-            dot_product = np.dot(embedding1, embedding2)
-            norm1 = np.linalg.norm(embedding1)
-            norm2 = np.linalg.norm(embedding2)
+    #         dot_product = np.dot(embedding1, embedding2)
+    #         norm1 = np.linalg.norm(embedding1)
+    #         norm2 = np.linalg.norm(embedding2)
             
-            # 0으로 나누는 오류 방지
-            if norm1 == 0 or norm2 == 0:
-                return 0.0
+    #         # 0으로 나누는 오류 방지
+    #         if norm1 == 0 or norm2 == 0:
+    #             return 0.0
                 
-            return dot_product / (norm1 * norm2)
-        except Exception as e:
-            print(f"Cosine similarity API error: {e}")
-            return 0.0
+    #         return dot_product / (norm1 * norm2)
+    #     except Exception as e:
+    #         print(f"Cosine similarity API error: {e}")
+    #         return 0.0
+    def _get_cosine_similarity(self, text1: str, text2: str) -> float:
+        """OpenAI API를 쓰지 않고 단순 문자열 비교로 대체합니다 (방법 B)."""
+        if not text1 or not text2:
+            return 1.0 if text1 == text2 else 0.0
+
+        # 문자열 양끝 공백 제거 및 대소문자 무시 비교
+        if text1.strip().lower() == text2.strip().lower():
+            return 1.0  # 완벽히 일치하면 유사도 100% 반환
+
+        return 0.0  # 틀리면 0% 반환
 
     # Lightweight matcher for reflection logging (no file logs)
     def _evaluate_action_match(self, action_obj, raw_actions):
