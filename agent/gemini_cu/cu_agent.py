@@ -44,36 +44,39 @@ console = Console()
 # 1. "none"     : 히스토리 무한 누적 (요약 없음, 삭제 없음) -> 느려짐, 토큰 에러 가능성
 # 2. "sliding"  : 오래된 턴 단순 삭제 (기억 상실) -> 가벼움, 문맥 끊김
 # 3. "abstract" : 오래된 턴 요약 압축 (기억 보존) -> 토큰 절약 + 문맥 유지
+# 4. "summary" : 매 step 마다 기록 요약 -> 단일 step만 히스토리에 남김
 
-HISTORY_STRATEGY = "abstract"  # <--- 여기를 수정해서 테스트하세요! ("none" | "sliding" | "abstract")
+HISTORY_STRATEGY = "summary"  # <--- 여기를 수정해서 테스트하세요! ("none" | "sliding" | "abstract" | "summary")
 
-KEEP_RECENT_TURNS = 5           # (공통) 생생하게 유지할 최근 턴 수 (스크린샷 포함)
-SUMMARY_THRESHOLD = 10          # (공통) 관리가 시작될 최소 히스토리 길이
+KEEP_RECENT_TURNS = 1           # (공통) 생생하게 유지할 최근 턴 수 (스크린샷 포함)
+SUMMARY_THRESHOLD = 2          # (공통) 관리가 시작될 최소 히스토리 길이
 LOG_DIR = "logs"                # 로그 파일이 저장될 폴더
 # ==============================================================================
 
 ANDROID_SYSTEM_PROMPT = """
+### Execution Rules (STRICT)
+1. **NO COORDINATE LISTING:** Never list UI elements' coordinates like "{ 'point': ... }" in your reasoning.
+2. **START WITH OPEN_APP:** The very first step of any task MUST be calling the `open_app` function to launch the target application. 
+3. **BREVITY:** Keep reasoning concise and under 100 characters.
+4. **ACT IMMEDIATELY:** If you see the target, call the function. Do not double-check or iterate options in text.
+5. **AFC MODE:** You must trigger a function call. If you don't, the task fails.
+6. **Caution on Termination:** When the task is nearly complete, terminate immediately without redundant confirmation steps.
+
 You are an intelligent agent tasked with operating an Android phone to complete user instructions.
 
 ### Your Environment and Capabilities
 1.  **Device View:** All interactions occur on a **mobile-sized screen** (normalized coordinates 0-1000).
 2.  **Core Actions (Predefined):** You can perform basic UI interactions like **click_at**, **type_text_at**, **scroll_at**, **wait_5_seconds**, and **go_back**.
-3.  **Advanced Actions (Custom):** You have access to the following specialized functions for high-level mobile operations:
-    * `open_app(app_name)`: To launch any application (e.g., '카메라', '설정').
-    * `go_home()`: To navigate directly to the Android home screen.
-    * `long_press_at(x, y)`: For long-press interactions.
-    * `scroll_to_text(text)`: To efficiently find and bring specific text into view.
-    * `swipe(start_x, start_y, end_x, end_y)`: To perform drag/swipe gestures.
-    * `set_device_setting(setting_name, value)`: To change device-level settings (e.g., Wi-Fi, Bluetooth).
-    * `close_current_app()`: To close the foreground application.
-    * `go_recent_apps()`: To access the recent applications screen.
-4.  **Browser Conventions:** Ignore conventions related to web browsers (URLs, forward/backward buttons, document scrolling) unless the current action is explicitly within a dedicated **browser app** (like '크롬').
+3.  **Advanced Actions (Custom):** You have access to specialized functions: open_app, go_home, long_press_at, scroll_to_text, swipe.
+4.  **Browser Conventions:** Ignore browser conventions unless in a browser app.
+"""
+# 3.  **Advanced Actions (Custom):** You have access to specialized functions: open_app, go_home, long_press_at, scroll_to_text, swipe, set_device_setting, close_current_app, go_recent_apps.
 
-### Strategy Guidelines
-* **Action Clarity:** Always state your **reasoning** before calling a function.
-* **Efficiency:** Use the advanced custom functions (e.g., `open_app`, `scroll_to_text`) whenever they offer a clear efficiency advantage over basic actions (e.g., multiple taps or scrolls).
-* **Decisive Conclusion:** Once the primary goal (e.g., deleting a file, saving a contact) is performed, do not perform extra verification steps like scrolling to check or navigating back. Use the RESPONSE type to provide a final summary and conclude the task immediately.
-* **Sequence Finish Rule:** When the goal is achieved, terminate the sequence by "finish" function. Do not use 'go_back', 'go_home', or 'close_current_app' on final step.
+ACTION_SUMMARY_PROMPT = """
+Analyze the previous summary, the current screenshot, and the executed action. 
+Summarize the agent's progress toward the goal in one concise sentence. 
+Focus on 'what was achieved' rather than 'how the model thought'.
+Example: "Opened the contacts app to find a phone number." or "Scrolled down to locate the settings menu."
 """
 
 FunctionResponseT = Dict[str, Any]
@@ -98,17 +101,18 @@ def swipe(start_x: int, start_y: int, end_x: int, end_y: int, duration: float = 
     """Performs a swipe/drag gesture between two normalized coordinates."""
     return {"status": "requested_swipe", "start_x": start_x, "start_y": start_y, "end_x": end_x, "end_y": end_y, "duration": duration}
 
-def set_device_setting(setting_name: str, value: Any) -> Dict[str, Any]:
-    """Changes a specific device setting (e.g., WIFI, Bluetooth)."""
-    return {"status": "requested_set_setting", "setting_name": setting_name, "value": value}
+# 벤치마크 실행시 동일한 환경 세팅을 위해 비활성화
+# def set_device_setting(setting_name: str, value: Any) -> Dict[str, Any]:
+#     """Changes a specific device setting (e.g., WIFI, Bluetooth)."""
+#     return {"status": "requested_set_setting", "setting_name": setting_name, "value": value}
 
-def close_current_app() -> Dict[str, str]:
-    """Closes the currently active application."""
-    return {"status": "requested_close_app"}
+# def close_current_app() -> Dict[str, str]:
+#     """Closes the currently active application."""
+#     return {"status": "requested_close_app"}
 
-def go_recent_apps() -> Dict[str, str]:
-    """Navigates to the device's recent applications screen."""
-    return {"status": "requested_recent_apps"}
+# def go_recent_apps() -> Dict[str, str]:
+#     """Navigates to the device's recent applications screen."""
+#     return {"status": "requested_recent_apps"}
 
 class CUAgent:
     PREDEFINED_COMPUTER_USE_FUNCTIONS = [
@@ -122,9 +126,9 @@ class CUAgent:
         "go_home",
         "scroll_to_text",
         "swipe",
-        "set_device_setting",
-        "close_current_app",
-        "go_recent_apps",
+        # "set_device_setting",
+        # "close_current_app",
+        # "go_recent_apps",
     ]
     EXCLUDED_PREDEFINED_FUNCTIONS = [
         "open_web_browser",
@@ -139,7 +143,8 @@ class CUAgent:
 
     def __init__(
         self,
-        model_name: str = 'gemini-2.5-computer-use-preview-10-2025',
+        # model_name: str = 'gemini-2.5-computer-use-preview-10-2025',
+        model_name: str = 'gemini-3-flash-preview',
         verbose: bool = True,
     ):
         self._model_name = model_name
@@ -151,6 +156,8 @@ class CUAgent:
             location=os.environ.get("VERTEXAI_LOCATION"),
         )
         self._contents: list[Content] = [] # 대화 히스토리
+        self.history_summary = ""
+        self._instruction = ""
 
         self._current_log_file = None # 현재 세션의 로그 파일 경로
 
@@ -168,26 +175,27 @@ class CUAgent:
             types.FunctionDeclaration.from_callable(client=self._client, callable=go_home),
             types.FunctionDeclaration.from_callable(client=self._client, callable=scroll_to_text),
             types.FunctionDeclaration.from_callable(client=self._client, callable=swipe),
-            types.FunctionDeclaration.from_callable(client=self._client, callable=set_device_setting),
-            types.FunctionDeclaration.from_callable(client=self._client, callable=close_current_app),
-            types.FunctionDeclaration.from_callable(client=self._client, callable=go_recent_apps),
+            # types.FunctionDeclaration.from_callable(client=self._client, callable=set_device_setting),
+            # types.FunctionDeclaration.from_callable(client=self._client, callable=close_current_app),
+            # types.FunctionDeclaration.from_callable(client=self._client, callable=go_recent_apps),
         ]
 
         self._generate_content_config = GenerateContentConfig(
-            temperature=1,
+            temperature=0.1,
             top_p=0.95,
             top_k=40,
-            max_output_tokens=8192,
+            max_output_tokens=2048, 
             system_instruction=ANDROID_SYSTEM_PROMPT,
+            thinking_config=types.ThinkingConfig(
+                # thinking_level="minimal",
+                thinking_budget=512
+            ),
             tools=[
                 types.Tool(
                     computer_use=types.ComputerUse(
                         environment=types.Environment.ENVIRONMENT_BROWSER,
                         excluded_predefined_functions=excluded_predefined_functions,
                     ),
-                ),
-                # AFC 메시지 해결 필요
-                types.Tool(
                     function_declarations=custom_functions
                 )
             ],
@@ -264,6 +272,7 @@ class CUAgent:
     def get_model_response(
         self, max_retries=5, base_delay_s=1
     ) -> types.GenerateContentResponse:
+
         for attempt in range(max_retries):
             try:
                 response = self._client.models.generate_content(
@@ -296,11 +305,15 @@ class CUAgent:
         """Extracts the text from the candidate."""
         if not candidate.content or not candidate.content.parts:
             return None
-        text = []
-        for part in candidate.content.parts:
-            if part.text:
-                text.append(part.text)
-        return " ".join(text) or None
+        # text = []
+        # for part in candidate.content.parts:
+        #     if part.text:
+        #         text.append(part.text)
+        # return " ".join(text) or None
+
+        # 모든 텍스트 파트를 합쳐서 반환
+        texts = [part.text for part in candidate.content.parts if part.text]
+        return "\n".join(texts) if texts else None
 
     def extract_function_calls(self, candidate: Candidate) -> list[types.FunctionCall]:
         """Extracts the function call from the candidate."""
@@ -359,7 +372,8 @@ class CUAgent:
             return {
                 "type": "ACTION",
                 "action": fc.name,
-                "args": dict(fc.args)
+                "args": dict(fc.args),
+                "message": reasoning
             }
         
         # Function Call이 없는 경우 (Reasoning = 최종 응답)
@@ -376,7 +390,7 @@ class CUAgent:
     # ==========================================================================
     # [History Management] 전략 구현
     # ==========================================================================
-    def _manage_history(self):
+    def _manage_history(self, prev_action_name=None, action_args=None, current_screenshot_data=None):
         """설정된 전략에 따라 히스토리를 정리합니다."""
         current_len = len(self._contents)
         
@@ -392,6 +406,10 @@ class CUAgent:
 
         elif HISTORY_STRATEGY == "abstract":
             self._abstract_history()
+
+        elif HISTORY_STRATEGY == "summary":
+            if prev_action_name and current_screenshot_data:
+                self._generate_step_summary(prev_action_name, action_args, current_screenshot_data)
 
         # 정리 후 상태 기록
         self._log_full_history_state(f"After Management ({HISTORY_STRATEGY})")
@@ -476,13 +494,122 @@ class CUAgent:
 
         except Exception as e:
             self._log_to_file(f"-> Summary Failed: {e}")
+
+    def _generate_step_summary(self, prev_action_name, action_args, current_screenshot_data):
+        """
+        [Fix] Thought Signature 에러 방지
+        기존의 Model Turn(FunctionCall 포함)을 새로 생성하지 않고, 
+        히스토리에 남아있던 원본 객체(self._contents[-2])를 그대로 재사용합니다.
+        이렇게 해야 Gemini가 생성했던 숨겨진 메타데이터(Thought Signature)가 유지됩니다.
+        """
+        
+        # 1. 텍스트 요약 생성 (기존 로직 유지)
+        prev_summary = self.history_summary if self.history_summary else "Task started."
+        
+        summary_prompt = f"""
+        You are tracking the progress of an AI agent.
+        
+        [Original Goal]: {self._instruction}
+        [Previous Summary]: {prev_summary}
+        [Just Executed Action]: {prev_action_name} (Args: {action_args})
+        
+        ### Assignment
+        Update the [Previous Summary] to include the [Just Executed Action].
+        
+        ### Rules (STRICT)
+        1. **NO TRUNCATION**: You MUST finish every sentence with a period(".").
+        2. **CONSOLIDATE**: Do NOT make a list. Write as a coherent narrative (1 paragraph).
+        3. **LENGTH**: Keep it under 3 sentences.
+        4. **FOCUS**: Focus on what was achieved.
+        """
+        
+        summary_request = [
+            summary_prompt,
+            types.Part.from_bytes(data=current_screenshot_data, mime_type="image/png")
+        ]
+        
+        new_summary = ""
+        is_valid = False
+
+        try:
+            res = self._client.models.generate_content(
+                model='gemini-3-flash-preview', 
+                contents=summary_request,
+                config=types.GenerateContentConfig(
+                    max_output_tokens=1024,
+                    thinking_config=types.ThinkingConfig(
+                        thinking_level="minimal"
+                    ),
+                )
+            )
+            
+            raw_text = res.text.strip()
+            
+            if raw_text and raw_text[-1] in ['.', '!', '?']:
+                new_summary = raw_text
+                is_valid = True
+            else:
+                self._log_to_file(f"-> Invalid Summary Detected (Truncated): {raw_text}")
+            
+        except Exception as e:
+            self._log_to_file(f"-> Summary Generation Failed: {e}")
+
+        if not is_valid:
+            args_str = ", ".join([f"{k}='{v}'" for k, v in action_args.items()])
+            fallback_text = f"{prev_summary} Then, the agent executed '{prev_action_name}' with arguments ({args_str})."
+            new_summary = fallback_text
+            self._log_to_file(f"-> Using Fallback Summary: {new_summary}")
+        else:
+            self._log_to_file(f"-> Updated Summary: {new_summary}")
+
+        self.history_summary = new_summary
+
+        # ==========================================================================
+        # 2. 히스토리 재구성 (핵심 수정 사항)
+        # Model 턴을 새로 만들지 말고, 기존 리스트에서 그대로 퍼옵니다.
+        # ==========================================================================
+        
+        # 히스토리 재구성: [User: Goal] -> [Model: Summary + FunctionCall] -> [User: Observation]
+        
+        # [Turn 0: User] 목표
+        turn_0_user = Content(
+            role="user", 
+            parts=[Part(text=f"Original Goal: {self._instruction}")]
+        )
+
+        # [Turn 1: Model] 요약(Text) + 원본 Function Call
+        # 기존 모델 턴(-2) 가져오기 (Thought Signature 보존)
+        original_model_turn = self._contents[-2]
+        
+        # 요약 파트 생성
+        summary_part = Part(text=f"### Current Status Summary\n{self.history_summary}")
+        
+        # [핵심] [요약, 기존Parts...] 순서로 결합하여 새 Model 턴 생성
+        new_model_parts = [summary_part]
+        new_model_parts.extend(original_model_turn.parts)
+        
+        turn_1_model = Content(
+            role="model",
+            parts=new_model_parts
+        )
+
+        # [Turn 2: User] 관측 (기존 유지)
+        turn_2_observation = self._contents[-1]
+
+        # 재조립
+        self._contents = [turn_0_user, turn_1_model, turn_2_observation]
+        
+        self._log_to_file(f"-> History rebuilt (Summary moved to Model turn). Length: {len(self._contents)}")
     # ==========================================================================
 
     def init_task(self, instruction: str, screenshot_data: Optional[bytes], url_or_activity: Optional[str]) -> Dict[str, Any]:
         """[서버] 새 작업을 시작합니다."""
 
-        # [중요] 새로운 작업이 시작되면 새 로그 파일을 엽니다.
+        # 새로운 작업이 시작되면 새 로그 파일을 엽니다.
         self._start_new_log_file()
+
+        # 지시사항 저장
+        self._instruction = instruction
 
         if self._verbose:
             print(f"[CUAgent] init_task: 새 작업 시작 (Instruction: {instruction})")
@@ -504,13 +631,11 @@ class CUAgent:
     def step(self, previous_action: Dict[str, Any], current_screenshot_data: bytes, current_activity: Optional[str]) -> Dict[str, Any]:
         """[서버] 이전 액션의 결과(새 스크린샷)를 받아 다음 추론을 수행합니다."""
         
-        # [수정] .get()을 사용하여 키 에러 방지
-        prev_action_name = previous_action.get('action')
-        if not prev_action_name or str(prev_action_name).strip() == "":
-            prev_action_name = "init_task"
+        prev_action_name = previous_action.get('action', 'init_task')
+        prev_action_args = previous_action.get('args', {})
 
         if self._verbose:
-            print(f"[CUAgent] step: 이전 액션 '{previous_action['action']}'의 결과 수신")
+            print(f"[CUAgent] step: 이전 액션 '{prev_action_name}'의 결과 수신")
 
         function_response_data = {
             "result": "Action executed by client successfully.",
@@ -541,6 +666,10 @@ class CUAgent:
             )
         )
 
-        self._manage_history()
+        self._manage_history(
+            prev_action_name=prev_action_name,
+            action_args=prev_action_args,
+            current_screenshot_data=current_screenshot_data
+        )
 
         return self._run_and_parse_response()
