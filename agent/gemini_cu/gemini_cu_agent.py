@@ -1,9 +1,11 @@
 import io
 import os
 import json
+import copy
 from datetime import datetime
 from agent.base_agent import Agent, AgentInteractionResult, AgentInteractionData
 from agent.gemini_cu.cu_agent import CUAgent
+from google.genai.types import Part
 
 class GeminiCUAgent(Agent):
     def __init__(self, model, reflection_model, summary_model, env, prompt, 
@@ -16,9 +18,6 @@ class GeminiCUAgent(Agent):
         self.som_mode = som_mode
         self.is_first_step = True
         self.last_action = None
-
-        # [추가] 환경 데이터셋 규격에 맞는 앱 리스트 세팅
-        self.installed_apps = ["Audio_recorder", "Broccoli", "Camera", "Clock", "Contacts", "Expense"]
 
         self.env.results_path = os.path.join(
             "./results", self.name, 
@@ -42,70 +41,61 @@ class GeminiCUAgent(Agent):
         screenshot_bytes = img_byte_arr.getvalue()
 
         if self.is_first_step:
-            app_context = f"\n\n[Installed Apps]: {', '.join(self.installed_apps)}"
-            instruction = self.instruction + app_context
-            cu_res = self.cu_agent.init_task(instruction, screenshot_bytes, "mobile_screen")
+            cu_res = self.cu_agent.init_task(self.instruction, screenshot_bytes, "mobile_screen")
             self.is_first_step = False
         else:
             cu_res = self.cu_agent.step(self.last_action, screenshot_bytes, "mobile_screen")
 
-        # 2. 에이전트 응답 -> 벤치마크 액션 매핑 (신규 메소드 호출)
+        raw_msg = cu_res.get("message")
+        original_reasoning = str(raw_msg) if raw_msg is not None else "None"
+        
+        # 2. 벤치마크 액션 매핑
         action_dict, done, success = self._map_cu_res_to_bench(cu_res, width, height)
-
-        # Mobi-Bench 환경 규격에 맞게 최종 딕셔너리 생성
         final_action = {"action_type": action_dict.get("type", "Finish")}
         final_action.update(action_dict)
 
-        # 3. 벤치마크 환경에서 액션 실행
+        # 3. 액션 실행
         result = self.env.execute_action(final_action)
-
-        # 4. [핵심] 히스토리 동기화: 에이전트의 기억을 벤치마크의 정답(Default)으로 갱신
+        
+        # 4. 히스토리 동기화
         default_action_from_bench = getattr(result, 'default_action', None)
 
         if default_action_from_bench:
-            # 벤치마크 정답 경로를 에이전트 기억 규격으로 변환
             sync_res = self._map_bench_to_cu_res(default_action_from_bench)
-            
-            # API 히스토리에 이미 기록된 'FunctionCall'의 이름까지 벤치마크 정답으로 바꿉니다.
+            action_name = sync_res.get("action", "finish")
+
             if self.cu_agent._contents:
-                from google.genai.types import Part, FunctionCall
-                
-                # 모델의 마지막 응답(Reasoning + FunctionCall)을 가져옴
                 last_model_content = self.cu_agent._contents[-1]
                 
-                # 모델이 읽게 될 본인의 reasoning을 "정답을 따르기로 결정했다"는 내용으로 대체
-                sync_action_name = sync_res.get("action", "Finish")
-                cleansed_msg = f"Task condition satisfied. I am performing {sync_action_name} as the correct next step."
-                
-                new_parts = [Part(text=cleansed_msg)]
-                
-                # 벤치마크 정답이 액션(Click 등)일 경우, 반드시 FunctionCall 파트를 동기화해야 400 에러가 안 남
-                if sync_res["type"] == "ACTION":
-                    new_parts.append(Part(
-                        function_call=FunctionCall(
-                            name=sync_res["action"], 
-                            args=sync_res["args"]
-                        )
-                    ))
-                
-                last_model_content.parts = new_parts
+                # 새 객체를 생성하지 않고, 기존에 들어있는 Part들을 순회하며 값만 수정합니다.
+                for part in last_model_content.parts:
+                    # 1. 기존 Reasoning 텍스트 파트의 내용만 교체 (thought_signature 보존)
+                    if part.text is not None:
+                        part.text = "" #f"Executing {action_name} to fulfill the request."
+                    # print("\nchanged\n")
+                    
+                    # 2. 기존 FunctionCall 파트의 이름과 인자만 교체
+                    if part.function_call:
+                        part.function_call.name = action_name
+                        part.function_call.args = sync_res["args"]
+                        
+                sync_res["action"] = action_name
 
             self.last_action = sync_res
         else:
-            # 정답 정보가 없는 경우에만 에이전트의 실제 응답 기록
             self.last_action = cu_res
-            # print("\n\t[Warning] 벤치마크 응답에 디폴트 액션이 없어 실제 응답을 기록합니다.\n")
-
+        
         return AgentInteractionResult(
             done=result.done, 
             success=result.success,
             data=AgentInteractionData(
                 instruction=self.instruction, 
                 screen=xml,
-                reason=cu_res.get("message", ""), 
+                reason=original_reasoning, # 보존된 원본 텍스트 반환
                 action=final_action
             )
         )
+        
 
     def _map_cu_res_to_bench(self, cu_res, width, height):
         """
@@ -117,25 +107,25 @@ class GeminiCUAgent(Agent):
         success = False
 
         raw_action = cu_res.get("action", "")
-        reasoning = cu_res.get("message", "").lower()
+        # reasoning = cu_res.get("message", "").lower()
 
-        # [지능적 종료 판단 키워드 설정]
-        completion_keys = ["successfully", "done", "finished", "completed", "no more", "deleted", "saved", "all recipes", "no other"]
-        verify_keys = ["check", "verify", "ensure", "confirm", "any other", "look for"]
+        # # [지능적 종료 판단 키워드 설정]
+        # completion_keys = ["successfully", "done", "finished", "completed", "no more", "deleted", "saved", "all recipes", "no other"]
+        # verify_keys = ["check", "verify", "ensure", "confirm", "any other", "look for"]
 
-        # 상황 1: 할 일을 다 마치고 앱을 끄거나 뒤로 가려 함 (is_closing)
-        is_closing = raw_action in ["go_back", "go_home", "close_current_app"] and \
-                     any(k in reasoning for k in completion_keys)
+        # # 상황 1: 할 일을 다 마치고 앱을 끄거나 뒤로 가려 함 (is_closing)
+        # is_closing = raw_action in ["go_back", "go_home", "close_current_app"] and \
+        #              any(k in reasoning for k in completion_keys)
         
-        # 상황 2: 완료 직후 "더 있나?" 확인하려고 스크롤 시도 (is_verifying)
-        is_verifying = raw_action in ["scroll_at", "swipe"] and \
-                       any(k in reasoning for k in verify_keys) and \
-                       any(k in reasoning for k in completion_keys)
+        # # 상황 2: 완료 직후 "더 있나?" 확인하려고 스크롤 시도 (is_verifying)
+        # is_verifying = raw_action in ["scroll_at", "swipe"] and \
+        #                any(k in reasoning for k in verify_keys) and \
+        #                any(k in reasoning for k in completion_keys)
 
-        # 의도 감지 시 Finish 액션으로 강제 전환
-        if is_closing or is_verifying:
-            print(f"\n\t[Client Logic] Reasoning에서 완료 및 검증 의도 감지. {raw_action}을 Finish로 매핑합니다.\n")
-            return {"type": "Finish", "default": True}, True, True
+        # # 의도 감지 시 Finish 액션으로 강제 전환
+        # if is_closing or is_verifying:
+        #     print(f"\n\t[Client Logic] Reasoning에서 완료 및 검증 의도 감지. {raw_action}을 Finish로 매핑합니다.\n")
+        #     return {"type": "Finish", "default": True}, True, True
 
         # 기본 매핑 로직 시작
         if cu_res.get("type") == "ACTION":
@@ -178,8 +168,9 @@ class GeminiCUAgent(Agent):
                     "bounds": f"[{x},{y}][{x},{y}]",
                     "default": True
                 }
-            elif raw_action in ["scroll_at", "scroll_to_text"]:
-                x, y = int(args.get("x", 500) * width / 1000), int(args.get("y", 500) * height / 1000)
+            elif raw_action in ["scroll_at", "scroll_to_text", "swipe"]:
+                x = int(args.get("x", 500) * width / 1000)
+                y = int(args.get("y", 500) * height / 1000)
                 # scroll_to_text는 보통 아래로 찾으러 내려가므로 'Down'을 기본값으로 사용
                 direction = args.get("direction", "Down").capitalize()
                 action_dict = {
@@ -187,6 +178,20 @@ class GeminiCUAgent(Agent):
                     "type": "Swipe", # 정답지의 'Swipe' 타입과 매칭
                     "params": {"direction": direction},
                     "bounds": f"[{x},{y}][{x},{y}]",
+                    "default": True
+                }
+            elif raw_action == "set_device_setting":
+                action_dict = {
+                    "type": "OpenApp",
+                    "params": {"app": "setting"},
+                    "bounds": None,
+                    "default": True
+                }
+            elif raw_action == "go_back":
+                action_dict = {
+                    "type": "Navigate Back",
+                    "params": {},
+                    "bounds": "[0,0][0,0]",
                     "default": True
                 }
             elif raw_action == "wait_5_seconds":
@@ -200,7 +205,6 @@ class GeminiCUAgent(Agent):
             done, success = True, True
         else:
             done = True
-
         return action_dict, done, success
 
     def _map_bench_to_cu_res(self, bench_action):
@@ -239,6 +243,9 @@ class GeminiCUAgent(Agent):
         elif b_type in ["swipe", "scroll_at"]:
             mapped_action = "scroll_at"
             args = {"x": norm_x, "y": norm_y, "direction": params.get("direction", "").lower()}
+        elif b_type in ["Navigate Back", "go_back"]:
+            mapped_action = "go_back"
+            args = {}
         elif b_type == "finish":
             return {"type": "RESPONSE", "message": "Task completed successfully."}
         else:
@@ -264,5 +271,11 @@ class GeminiCUAgent(Agent):
         # 필요 시 CUAgent 내부 히스토리 강제 초기화 (init_task에서 수행되지만 안전을 위해)
         if hasattr(self, 'cu_agent'):
             self.cu_agent._contents = [] 
+
+            # 누적된 요약본 초기화
+            self.cu_agent.history_summary = ""
+            
+            # 지시사항 백업 초기화
+            self.cu_agent._instruction = instruction
         
         print(f"\n[GeminiCUAgent] Task Reset: {instruction}")
