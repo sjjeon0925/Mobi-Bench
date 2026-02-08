@@ -9,7 +9,9 @@ from datetime import datetime
 
 from utils import log
 
-target_tasks = [2]
+target_tasks = [] #,13,14,16,18]
+target_range = (0,1)
+NOT_LIST_BUT_RANGE = True
 PRINT_ON_FILE = False
 
 def _numeric_sort_key(entry: str) -> tuple[int, object]:
@@ -59,6 +61,11 @@ class BenchmarkAgentBench(Benchmark):
         self.task_attempts_without_retry = 0
         self.task_success_without_retry = 0
 
+        # [추가] 실패 유형 분석용 카운터
+        self.fail_general = 0       # 일반적인 실패
+        self.fail_termination = 0     # 마지막만 틀렸는데, 종료 시도(Back/Home)였던 경우
+        self.fail_last_step_only = 0  # 마지막만 틀렸는데, 일반 액션이었던 경우
+
     def run(self):
         import sys
         self.env.load_env()
@@ -86,13 +93,15 @@ class BenchmarkAgentBench(Benchmark):
             for task_name in sorted(os.listdir(app_dir), key=_numeric_sort_key):
                 if task_name in ['.DS_Store', 'backup']:
                     continue
-
-                # 폴더명이 숫자이고, target_tasks 리스트에 해당 숫자가 포함되어 있는지 확인
-                if target_tasks and task_name.isdigit():
-                    if int(task_name) not in target_tasks:
-                        continue  # 리스트에 없는 번호는 건너뜀
-                # if int(task_name) <= 0 or int(task_name) > 50:
-                #     continue
+                if NOT_LIST_BUT_RANGE:
+                    if int(task_name) < target_range[0] or int(task_name) > target_range[1]:
+                        continue
+                else:
+                    # 폴더명이 숫자이고, target_tasks 리스트에 해당 숫자가 포함되어 있는지 확인
+                    if target_tasks and task_name.isdigit():
+                        if int(task_name) not in target_tasks:
+                            continue  # 리스트에 없는 번호는 건너뜀
+                
 
                 self.env.task_name = task_name
                 task_dir = os.path.join(app_dir, task_name)
@@ -165,6 +174,38 @@ class BenchmarkAgentBench(Benchmark):
                             print("current success actions:", self.env.success_actions)
 
                             if result.done:
+                                # [최종 step 실패 유형 분류] ---------------------------------
+                                if not result.success:
+                                    # 1. 성공 이력 확인 (env.success_actions: [1, 1, 0, ...])
+                                    success_history = self.env.success_actions
+                                    
+                                    # "마지막 스텝만 틀렸는지" 확인
+                                    # 조건: 히스토리가 존재하고, 마지막 빼고 다 1(성공)이며, 마지막은 0(실패)
+                                    is_only_last_failed = (
+                                        len(success_history) > 0 and 
+                                        all(x == 1 for x in success_history[:-1]) and 
+                                        success_history[-1] == 0
+                                    )
+
+                                    if is_only_last_failed:
+                                        # 마지막 행동 타입 확인
+                                        last_action = getattr(result.data, 'action', {})
+                                        last_type = last_action.get('action_type', '').lower() if last_action else ""
+                                        
+                                        # 종료 관련 키워드
+                                        termination_keywords = ['back', 'home', 'finish', 'close', 'response', 'navigate_back']
+
+                                        if any(k in last_type for k in termination_keywords):
+                                            self.fail_termination += 1
+                                            print(f"  -> [Failure Analysis] Termination Failed (Correct until last step -> Tried {last_type})")
+                                        else:
+                                            self.fail_last_step_only += 1
+                                            print(f"  -> [Failure Analysis] Last Step Failed (Correct until last step -> Tried {last_type})")
+                                    else:
+                                        # 중간에 이미 틀렸던 경우
+                                        self.fail_general += 1
+                                        print(f"  -> [Failure Analysis] General Failure (Failed at step {success_history.index(0) + 1}/{len(success_history)})")
+                                # -----------------------------------------------------
                                 task = {
                                     "instruction": instruction,
                                     "success": result.success,
@@ -275,6 +316,16 @@ class BenchmarkAgentBench(Benchmark):
         print(f"Action success (without retry): {_format_rate(self.action_success_without_retry, self.action_attempts_without_retry)}")
         print(f"Task success (with retry): {_format_rate(self.task_success_with_retry, self.task_attempts_with_retry)}")
         print(f"Task success (without retry): {_format_rate(self.task_success_without_retry, self.task_attempts_without_retry)}")
+        # 실패 유형 출력
+        total_failures = self.fail_general + self.fail_termination + self.fail_last_step_only
+        print("\n" + "="*20 + " Failure Analysis " + "="*20)
+        if total_failures > 0:
+            print(f"1. Termination Failures (Last step wrong - Back/Home): {_format_rate(self.fail_termination, total_failures)}")
+            print(f"2. Last Step Failures (Last step wrong - Action):      {_format_rate(self.fail_last_step_only, total_failures)}")
+            print(f"3. General Failures (Failed earlier):                  {_format_rate(self.fail_general, total_failures)}")
+        else:
+            print("No failures recorded.")
+        print("="*58 + "\n")
 
         with open(os.path.join(self.env.results_path, "response.txt"), 'a', encoding='utf-8') as f:
             f.write("Benchmark completed.\n")
@@ -289,3 +340,8 @@ class BenchmarkAgentBench(Benchmark):
             f.write(f"Action success (without retry): {_format_rate(self.action_success_without_retry, self.action_attempts_without_retry)}\n")
             f.write(f"Task success (with retry): {_format_rate(self.task_success_with_retry, self.task_attempts_with_retry)}\n")
             f.write(f"Task success (without retry): {_format_rate(self.task_success_without_retry, self.task_attempts_without_retry)}\n")
+            # 실패 유형 출력
+            f.write("\n[Failure Breakdown]\n")
+            f.write(f"Termination Failures: {self.fail_termination}\n")
+            f.write(f"Last Step Only Failures: {self.fail_last_step_only}\n")
+            f.write(f"General Failures: {self.fail_general}\n")
