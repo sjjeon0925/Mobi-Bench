@@ -9,9 +9,9 @@ from datetime import datetime
 
 from utils import log
 
-target_tasks = [] #,13,14,16,18]
-target_range = (0,1)
-NOT_LIST_BUT_RANGE = True
+target_tasks = [7] #,13,14,16,18]
+target_range = (481,500)
+NOT_LIST_BUT_RANGE = False
 PRINT_ON_FILE = False
 
 def _numeric_sort_key(entry: str) -> tuple[int, object]:
@@ -62,9 +62,10 @@ class BenchmarkAgentBench(Benchmark):
         self.task_success_without_retry = 0
 
         # [추가] 실패 유형 분석용 카운터
-        self.fail_general = 0       # 일반적인 실패
-        self.fail_termination = 0     # 마지막만 틀렸는데, 종료 시도(Back/Home)였던 경우
-        self.fail_last_step_only = 0  # 마지막만 틀렸는데, 일반 액션이었던 경우
+        self.fail_general = 0           # 일반적인 실패
+        self.fail_termination = 0       # 마지막만 틀렸는데, 종료 시도(Back/Home)였던 경우
+        self.fail_last_step_only = 0    # 마지막만 틀렸는데, 일반 액션이었던 경우
+        self.fail_token_overflow = 0    # 토큰 오버플로우(UI 나열) 실패
 
     def run(self):
         import sys
@@ -134,6 +135,9 @@ class BenchmarkAgentBench(Benchmark):
                 self.agent.reset(instruction)
                 self.env.success_actions = []
                 task_had_retry = False
+                
+                # 토큰 오버플로우 발생 여부 추적
+                has_token_overflow = False
 
                 print(f"Running task {task_name} with instruction: {instruction}")
                 print("="*15, "Raw Actions (Pretty-Printed)", "="*15)
@@ -152,11 +156,22 @@ class BenchmarkAgentBench(Benchmark):
                 with open(task_log_path, 'w', encoding='utf-8') as f_task:
                     if PRINT_ON_FILE:
                         sys.stdout = f_task
-                    # [핵심 수정] 태스크 단위 예외 처리 시작
+                    # 태스크 단위 예외 처리 시작
                     try:
                         while True:
-                            # 리트라이 없이 단 1회만 실행
                             result: AgentInteractionResult = self.agent.step()
+
+                            # 루프 내부에서 토큰 오버플로우 케이스 즉시 검사
+                            # 에이전트가 반환한 데이터(result.data)에서 type을 확인
+                            current_action_data = getattr(result.data, 'action', {}) 
+                            # cu_agent 구조상 result.data 자체가 dict일 수도 있으니 안전하게
+                            if not isinstance(current_action_data, dict):
+                                current_action_data = result.data if isinstance(result.data, dict) else {}
+                                
+                            if current_action_data.get('type') == 'TOKEN_OVERFLOW':
+                                has_token_overflow = True
+                                print(f"  -> 🚨 Step {step+1}: Token Overflow Detected!")
+
                             current_step_idx = step
                             step += 1
 
@@ -174,37 +189,47 @@ class BenchmarkAgentBench(Benchmark):
                             print("current success actions:", self.env.success_actions)
 
                             if result.done:
-                                # [최종 step 실패 유형 분류] ---------------------------------
+                                # 실패 유형 분석
                                 if not result.success:
-                                    # 1. 성공 이력 확인 (env.success_actions: [1, 1, 0, ...])
-                                    success_history = self.env.success_actions
+                                    # 루프 도중 한 번이라도 토큰 오버플로우가 있었는지 체크
+                                    if has_token_overflow:
+                                        self.fail_token_overflow += 1
+                                        print(f"  -> [Failure Analysis] ❌ Token Overflow (UI Hallucination Detected during execution)")
                                     
-                                    # "마지막 스텝만 틀렸는지" 확인
-                                    # 조건: 히스토리가 존재하고, 마지막 빼고 다 1(성공)이며, 마지막은 0(실패)
-                                    is_only_last_failed = (
-                                        len(success_history) > 0 and 
-                                        all(x == 1 for x in success_history[:-1]) and 
-                                        success_history[-1] == 0
-                                    )
-
-                                    if is_only_last_failed:
-                                        # 마지막 행동 타입 확인
-                                        last_action = getattr(result.data, 'action', {})
-                                        last_type = last_action.get('action_type', '').lower() if last_action else ""
-                                        
-                                        # 종료 관련 키워드
-                                        termination_keywords = ['back', 'home', 'finish', 'close', 'response', 'navigate_back']
-
-                                        if any(k in last_type for k in termination_keywords):
-                                            self.fail_termination += 1
-                                            print(f"  -> [Failure Analysis] Termination Failed (Correct until last step -> Tried {last_type})")
-                                        else:
-                                            self.fail_last_step_only += 1
-                                            print(f"  -> [Failure Analysis] Last Step Failed (Correct until last step -> Tried {last_type})")
                                     else:
-                                        # 중간에 이미 틀렸던 경우
-                                        self.fail_general += 1
-                                        print(f"  -> [Failure Analysis] General Failure (Failed at step {success_history.index(0) + 1}/{len(success_history)})")
+                                        success_history = self.env.success_actions
+                                        
+                                        # "마지막 스텝만 틀렸는지" 확인
+                                        is_only_last_failed = (
+                                            len(success_history) > 0 and 
+                                            all(x == 1 for x in success_history[:-1]) and 
+                                            success_history[-1] == 0
+                                        )
+
+                                        if is_only_last_failed:
+                                            # 마지막 행동 확인 (result.data 사용)
+                                            # 루프가 끝난 시점의 마지막 액션
+                                            final_act = current_action_data
+                                            final_act_name = (
+                                                final_act.get('action', '') or 
+                                                final_act.get('name', '') or 
+                                                final_act.get('action_type', '') or 
+                                                final_act.get('type', '')
+                                            )
+                                            final_act_name = str(final_act_name).lower()
+                                            print(f"\nfinal_act_name = {final_act_name}\n")
+                                            termination_keywords = ['go back', 'go home', 'finish', 'close', 'response', 'navigate back']
+
+                                            if any(k in final_act_name for k in termination_keywords):
+                                                self.fail_termination += 1
+                                                print(f"  -> [Failure Analysis] Termination Failed (Correct until last step -> Tried {final_act_name})")
+                                            else:
+                                                self.fail_last_step_only += 1
+                                                print(f"  -> [Failure Analysis] Last Step Failed (Correct until last step -> Tried {final_act_name})")
+                                        else:
+                                            # 중간에 틀림
+                                            self.fail_general += 1
+                                            print(f"  -> [Failure Analysis] General Failure (Failed at step {success_history.index(0) + 1}/{len(success_history)})")
                                 # -----------------------------------------------------
                                 task = {
                                     "instruction": instruction,
@@ -280,6 +305,11 @@ class BenchmarkAgentBench(Benchmark):
                         print("해당 태스크를 실패 처리하고 다음 태스크로 넘어갑니다.")
                         
                         self.total_instruction += 1
+
+                        # [수정] 에러가 나서 중단되었으므로, 시도 횟수(without retry)를 증가시키고 실패로 처리해야 분모가 맞습니다.
+                        self.task_attempts_without_retry += 1  # <--- 추가
+                        self.fail_general += 1                 # <--- 추가 (크래시도 실패로 간주)
+
                         results.append({
                             "instruction": instruction,
                             "success": False,
@@ -320,9 +350,10 @@ class BenchmarkAgentBench(Benchmark):
         total_failures = self.fail_general + self.fail_termination + self.fail_last_step_only
         print("\n" + "="*20 + " Failure Analysis " + "="*20)
         if total_failures > 0:
-            print(f"1. Termination Failures (Last step wrong - Back/Home): {_format_rate(self.fail_termination, total_failures)}")
-            print(f"2. Last Step Failures (Last step wrong - Action):      {_format_rate(self.fail_last_step_only, total_failures)}")
-            print(f"3. General Failures (Failed earlier):                  {_format_rate(self.fail_general, total_failures)}")
+            print(f"1. Token Overflow Failures (UI Listing/No FC): {_format_rate(self.fail_token_overflow, total_failures)}")
+            print(f"2. Termination Failures (Last step Back/Home): {_format_rate(self.fail_termination, total_failures)}")
+            print(f"3. Last Step Failures (Last step Action):      {_format_rate(self.fail_last_step_only, total_failures)}")
+            print(f"4. General Failures (Failed earlier):          {_format_rate(self.fail_general, total_failures)}")
         else:
             print("No failures recorded.")
         print("="*58 + "\n")
@@ -342,6 +373,8 @@ class BenchmarkAgentBench(Benchmark):
             f.write(f"Task success (without retry): {_format_rate(self.task_success_without_retry, self.task_attempts_without_retry)}\n")
             # 실패 유형 출력
             f.write("\n[Failure Breakdown]\n")
+            
+            f.write(f"Token Overflow Failures: {self.fail_token_overflow}\n")
             f.write(f"Termination Failures: {self.fail_termination}\n")
             f.write(f"Last Step Only Failures: {self.fail_last_step_only}\n")
             f.write(f"General Failures: {self.fail_general}\n")
